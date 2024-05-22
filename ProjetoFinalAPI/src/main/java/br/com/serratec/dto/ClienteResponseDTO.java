@@ -6,12 +6,16 @@ public class ClienteResponseDTO {
 	private String nome;
 	private String telefone;
 	private String email;
+	private String cep;
+	private String logradouro;
 
 	public ClienteResponseDTO(Cliente cliente) {
 		super();
 		this.nome = cliente.getNome();
 		this.telefone = cliente.getTelefone();
 		this.email = cliente.getEmail();
+		this.cep = cliente.getCep();
+		this.logradouro = cliente.getEndereco().getLogradouro();
 	}
 
 	public String getNome() {
@@ -36,6 +40,22 @@ public class ClienteResponseDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
 }

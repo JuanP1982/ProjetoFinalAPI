@@ -4,12 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Cliente {
@@ -23,6 +25,12 @@ public class Cliente {
 	private String email;
 	private String cpf;
 	private String senha;
+	
+	@Size(max = 9, message = " Tamanho inválido!")
+	private String cep;
+
+	@Embedded
+	private Endereco endereco;
 
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Pedido> pedidos = new HashSet<>();
@@ -78,5 +86,28 @@ public class Cliente {
 	public Set<Pedido> getPedidos() {
 		return pedidos;
 	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	@Override
+	public String toString() {
+		return "nome: " + nome + "\n telefone: " + telefone + "\n email: " + email;
+	}
+	
+	
 
 }

@@ -1,18 +1,28 @@
 package br.com.serratec.service;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.com.serratec.configuration.MailConfig;
 import br.com.serratec.dto.ClienteResponseDTO;
 import br.com.serratec.entity.Cliente;
+import br.com.serratec.entity.Endereco;
 import br.com.serratec.exception.EmailException;
+import br.com.serratec.exception.EnderecoException;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.repository.ClienteRepository;
 
@@ -24,25 +34,33 @@ public class ClienteService {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
-
+	
+	@Autowired
+	private MailConfig mailConfig;
+	
 	public List<ClienteResponseDTO> listar() {
 		List<Cliente> clientes = repository.findAll();
 
 		return clientes.stream().map((c) -> new ClienteResponseDTO(c)).collect(Collectors.toList());
 	}
 
-	public ClienteResponseDTO inserir(Cliente cliente) {
+	public ClienteResponseDTO inserir(Cliente cliente) throws Exception {
 		if (repository.findByEmail(cliente.getEmail()) != null) {
 			throw new EmailException("Email Já Existe na Base");
 		}
-		Cliente u = new Cliente();
-		u.setNome(cliente.getNome());
-		u.setEmail(cliente.getEmail());
-		u.setCpf(cliente.getCpf());
-		u.setTelefone(cliente.getTelefone());
-		u.setSenha(encoder.encode(cliente.getSenha()));
-		repository.save(u);
-		return new ClienteResponseDTO(u);
+		Cliente c = new Cliente();
+		c.setNome(cliente.getNome());
+		c.setEmail(cliente.getEmail());
+		c.setCpf(cliente.getCpf());
+		c.setTelefone(cliente.getTelefone());
+		c.setSenha(encoder.encode(cliente.getSenha()));
+		c.setCep(cliente.getCep());
+		Endereco endereco = this.getEndereco(cliente);
+		c.setEndereco(endereco);
+		
+		repository.save(c);
+		mailConfig.sendMail(c.getEmail(), "Cadastro de Usuário no Sistema", c.toString());
+		return new ClienteResponseDTO(c);
 	}
 
 	public ResponseEntity<String> atualizar(Long id, Cliente cliente) {
@@ -61,4 +79,24 @@ public class ClienteService {
 		}
 		throw new ResourceNotFoundException("Usuário com o id: " + id + " não encontrado!");
 	}
+	
+	public Endereco getEndereco(Cliente cliente){
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://viacep.com.br/ws/" + cliente.getCep() + "/json/"))
+                .build();
+        HttpResponse<String> response;
+
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
+                throw new EnderecoException("Erro ao buscar endereço! Código de status: " + response.statusCode());
+            }
+            
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(response.body(), Endereco.class);
+        } catch (IOException | InterruptedException e) {
+            throw new EnderecoException("Erro ao processar a resposta do servidor: " + e.getMessage(), e);
+        }
+    }
 }

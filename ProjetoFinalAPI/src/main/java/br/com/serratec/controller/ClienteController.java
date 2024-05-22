@@ -45,7 +45,8 @@ public class ClienteController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso"),
     })
-	public ClienteResponseDTO inserir(@RequestBody Cliente cliente) {
+	
+	public ClienteResponseDTO inserir(@Valid @RequestBody Cliente cliente) throws Exception {
 		return service.inserir(cliente);
 	}
 

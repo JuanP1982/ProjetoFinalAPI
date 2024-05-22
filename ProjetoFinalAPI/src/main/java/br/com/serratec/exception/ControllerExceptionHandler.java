@@ -70,4 +70,16 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroResposta);
 	}
+	
+	@ExceptionHandler(EnderecoException.class)
+	public ResponseEntity<Object> handleEnderecoException(EnderecoException ex) {
+
+		List<String> erros = new ArrayList<>();
+		erros.add(ex.getMessage());
+
+		ErroResposta erroResposta = new ErroResposta(HttpStatus.NOT_FOUND.value(), "Recurso não encontrado",
+				LocalDateTime.now(), erros);
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroResposta);
+	}
 }
