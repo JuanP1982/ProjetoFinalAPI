@@ -16,31 +16,53 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.serratec.dto.ClienteResponseDTO;
 import br.com.serratec.entity.Cliente;
 import br.com.serratec.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/clientes")
+@ApiResponses(value = { @ApiResponse(responseCode = "401", description = "Erro de autenticação"),
+		@ApiResponse(responseCode = "403", description = "Não há permissão para acessar o recurso"),
+		@ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+		@ApiResponse(responseCode = "500", description = "Exceção interna da aplicação"), })
 public class ClienteController {
 
 	@Autowired
 	private ClienteService service;
 
 	@GetMapping
+	 @Operation(summary = "Lista todos os clientes", description = "Listagem de Clientes")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Retorna todos os clientes"),})
 	public List<ClienteResponseDTO> listar() {
 		return service.listar();
 	}
 
 	@PostMapping
+	 @Operation(summary = "Insere um novo cliente", description = "Inserção de Cliente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso"),
+    })
 	public ClienteResponseDTO inserir(@RequestBody Cliente cliente) {
 		return service.inserir(cliente);
 	}
 
 	@PutMapping("{id}")
+	@Operation(summary = "Atualiza um cliente existente", description = "Atualização de Cliente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso"),
+    })
 	public ResponseEntity<String> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente) {
 		return service.atualizar(id, cliente);
 	}
 
 	@DeleteMapping("{id}")
+	 @Operation(summary = "Deleta um cliente existente", description = "Exclusão de Cliente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cliente deletado com sucesso"),
+    })
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		return service.deletar(id);
 	}
