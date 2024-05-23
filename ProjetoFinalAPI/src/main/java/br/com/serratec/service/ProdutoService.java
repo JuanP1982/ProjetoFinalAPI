@@ -32,8 +32,8 @@ public class ProdutoService {
 		return repository.save(produto);
 	}
 	
-	//inseriVarios
-	@PostMapping
+	//inserirVarios
+	
 	public List<Produto> inserirMuitos(List<Produto> produto) {
 		return repository.saveAll(produto);
 	}
