@@ -87,7 +87,7 @@ public class PedidoController {
         @ApiResponse(responseCode = "404", description = "Pedido não encontrado"),
     })
     public ResponseEntity<String> deletar(@PathVariable Long id) {
-        return service.deletar(id);
+        return service.deletar(id);a
         }
     }
 
