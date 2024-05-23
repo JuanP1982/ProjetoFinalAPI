@@ -24,7 +24,7 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@NotBlank(message = "Campo vazio ou nulo!")
 	private String status;
 

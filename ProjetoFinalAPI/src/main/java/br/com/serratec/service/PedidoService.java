@@ -30,7 +30,7 @@ public class PedidoService {
 	}
 	
 	public Pedido listarId(Long id) {
-		Pedido pedido=repository.findById(id).
+		Pedido pedido = repository.findById(id).
 				orElseThrow(()-> new ResourceNotFoundException("Perfil não encontrado!"));
 			pedido.calculaTotal();
 			return pedido;

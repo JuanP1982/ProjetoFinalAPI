@@ -42,7 +42,7 @@ public class Cliente {
 	
 	@CPF(message= "CPF invalido")
 	@NotBlank(message= "Campo vazio ou nulo")
-	@Column(nullable = false,length = 14)
+	@Column(nullable = false, length = 14)
 	private String cpf;
 	
 	@Column(nullable = false)
@@ -56,7 +56,6 @@ public class Cliente {
 
 	@Embedded
 	private Endereco endereco;
-	
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Pedido> pedidos = new HashSet<>();

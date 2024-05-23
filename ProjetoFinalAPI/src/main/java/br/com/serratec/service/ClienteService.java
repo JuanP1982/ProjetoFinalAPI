@@ -67,8 +67,9 @@ public class ClienteService {
 	public ResponseEntity<String> atualizar(Long id, Cliente cliente) {
 		if (repository.existsById(id)) {
 			cliente.setId(id);
+			cliente.setEndereco(this.getEndereco(cliente));
 			repository.save(cliente);
-			mailConfig.sendMail(cliente.getEmail(), "Seu perfil de Usuário no Sistema foi atualizado", cliente.toString());
+//			mailConfig.sendMail(cliente.getEmail(), "Seu perfil de Usuário no Sistema foi atualizado", cliente.toString());
 			return ResponseEntity.status(HttpStatus.OK).body("Informações Atualizadas com sucesso!");
 		}
 		throw new ResourceNotFoundException("Usuário com o id: " + id + " não encontrado!");
@@ -100,5 +101,15 @@ public class ClienteService {
         } catch (IOException | InterruptedException e) {
             throw new EnderecoException("Erro ao processar a resposta do servidor: " + e.getMessage(), e);
         }
+        
+        
     }
+	
+	 public ClienteResponseDTO listarId(Long id) {
+	        Cliente cliente = repository.findById(id).orElseThrow(() -> 
+	            new ResourceNotFoundException("Usuário com o id: " + id + " não encontrado!")
+	        );
+	        cliente.calculaPedidos();
+	        return new ClienteResponseDTO(cliente);
+	    }
 }
