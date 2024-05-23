@@ -3,6 +3,7 @@ package br.com.serratec.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.dto.ClienteResponseDTO;
 import br.com.serratec.entity.Cliente;
+import br.com.serratec.entity.Pedido;
 import br.com.serratec.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -46,8 +48,9 @@ public class ClienteController {
         @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso"),
     })
 	
-	public ClienteResponseDTO inserir(@Valid @RequestBody Cliente cliente) throws Exception {
-		return service.inserir(cliente);
+	public ResponseEntity <ClienteResponseDTO> inserir(@Valid @RequestBody Cliente cliente) throws Exception {
+		ClienteResponseDTO novoCliente = service.inserir(cliente);
+	        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
 	}
 
 	@PutMapping("{id}")

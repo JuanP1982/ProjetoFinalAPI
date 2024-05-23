@@ -22,6 +22,7 @@ public class Produto {
 
 	@Enumerated(EnumType.STRING)
 	private CategoriaEnum categoria;
+	
 	@JoinColumn(name = "id_pedido")
 	@ManyToOne
 	private Pedido pedido;
