@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import br.com.serratec.entity.Pedido;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.repository.PedidoRepository;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Service
@@ -22,7 +21,19 @@ public class PedidoService {
 
 	// listarc
 	public List<Pedido> listar() {
-		return repository.findAll();
+		List<Pedido> pedidos = repository.findAll();
+		for(Pedido pedido : pedidos) {
+			pedido.calculaTotal();
+		}
+		
+		return pedidos;
+	}
+	
+	public Pedido listarId(Long id) {
+		Pedido pedido=repository.findById(id).
+				orElseThrow(()-> new ResourceNotFoundException("Perfil não encontrado!"));
+			pedido.calculaTotal();
+			return pedido;
 	}
 	
 

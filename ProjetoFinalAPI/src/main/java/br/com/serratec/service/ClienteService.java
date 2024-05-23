@@ -39,7 +39,9 @@ public class ClienteService {
 	
 	public List<ClienteResponseDTO> listar() {
 		List<Cliente> clientes = repository.findAll();
-
+		for(Cliente cliente: clientes) {
+			cliente.calculaPedidos();
+		}
 		return clientes.stream().map((c) -> new ClienteResponseDTO(c)).collect(Collectors.toList());
 	}
 

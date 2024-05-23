@@ -43,6 +43,15 @@ public class PedidoController {
     public List<Pedido> listar() {
         return service.listar();
     }
+    
+    @GetMapping("/{id}")
+    @Operation(summary = "Lista um pedido", description = "Busca um produto específico pelo ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Retorna todo o pedido"), 
+    })
+    public Pedido listarId(@PathVariable Long id) {
+    	return service.listarId(id);
+    }
 
     @PostMapping
     @Transactional

@@ -50,7 +50,7 @@ public class Cliente {
 	private String senha;
 	
 	@NotBlank
-	@Pattern(regexp = "(\\d{5})-\\d{3}",message = "Telefone invalido")
+	@Pattern(regexp = "(\\d{5})-\\d{3}",message = "Cep invalido")
 	@Size(max = 9, message = " Tamanho inválido!")
 	private String cep;
 
@@ -60,7 +60,13 @@ public class Cliente {
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Pedido> pedidos = new HashSet<>();
-
+	
+	public void calculaPedidos() {
+		for(Pedido pedido : pedidos) {
+			pedido.calculaTotal();
+		}
+	}
+	
 	public Long getId() {
 		return id;
 	}

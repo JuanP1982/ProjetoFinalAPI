@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Pedido {
@@ -24,8 +25,10 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Campo vazio ou nulo!")
 	private String status;
 
+	private Double total = 0.0;
 
 	private LocalDate dataPedido;
 
@@ -37,13 +40,28 @@ public class Pedido {
 	@JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
 	private Set<Produto> produtos;
 
+	public void calculaTotal() {
+		for (Produto produto : produtos) {
+			this.total = total + produto.getPreco();
+		}
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
 	public String getStatus() {
 		return status;
 	}
-	
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public Long getId() {
 		return id;
 	}
