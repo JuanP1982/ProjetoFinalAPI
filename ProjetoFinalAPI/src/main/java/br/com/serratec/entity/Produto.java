@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.serratec.enums.CategoriaEnum;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Produto {
@@ -20,12 +23,17 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Campo vazio ou nulo")
+	@Column(length = 60, nullable = false)
 	private String nome;
-	private Double preco;
+	
+	
+	@Min(value = 0, message ="Valor minimo é igual a 0")
+	private Double preco; 
 
 	@Enumerated(EnumType.STRING)
 	private CategoriaEnum categoria;
-	
+
 	@JoinColumn(name = "id_pedido")
 	@ManyToOne
 	@JsonBackReference

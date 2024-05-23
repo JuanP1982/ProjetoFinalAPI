@@ -3,16 +3,21 @@ package br.com.serratec.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -20,14 +25,32 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	@NotBlank(message= "Campo vazio ou nulo")
+	@Column(length = 60, nullable=false)
 	private String nome;
-
+	
+	@NotBlank(message= "Campo vazio ou nulo")
+	@Pattern(regexp = "(\\d{2})\\d{5}-\\d{4}",message = "Telefone invalido")
+	@Column(length = 12,nullable = false)
 	private String telefone;
+	
+	@Email(message="Email invalido")
+	@NotBlank(message= "Campo vazio ou nulo")
+	@Column(nullable = false)
 	private String email;
+	
+	
+	@CPF(message= "CPF invalido")
+	@NotBlank(message= "Campo vazio ou nulo")
+	@Column(nullable = false,length = 14)
 	private String cpf;
+	
+	@Column(nullable = false)
+	@NotBlank(message= "Campo vazio ou nulo")
 	private String senha;
-
+	
+	@NotBlank
+	@Pattern(regexp = "(\\d{5})-\\d{3}",message = "Telefone invalido")
 	@Size(max = 9, message = " Tamanho inválido!")
 	private String cep;
 

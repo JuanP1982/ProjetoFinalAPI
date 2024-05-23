@@ -24,19 +24,26 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private String status;
+
+
 	private LocalDate dataPedido;
 
 	@JsonBackReference
 	@ManyToOne
 	private Cliente cliente;
+
+	@ManyToMany
+	@JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
+	private Set<Produto> produtos;
+
+	public String getStatus() {
+		return status;
+	}
 	
-	 @ManyToMany
-	    @JoinTable(
-	        name = "pedido_produto",
-	        joinColumns = @JoinColumn(name = "pedido_id"),
-	        inverseJoinColumns = @JoinColumn(name = "produto_id")
-	    )
-	    private Set<Produto> produtos;
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Long getId() {
 		return id;
 	}
