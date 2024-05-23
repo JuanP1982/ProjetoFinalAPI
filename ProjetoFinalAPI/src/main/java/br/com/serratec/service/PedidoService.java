@@ -34,7 +34,6 @@ public class PedidoService {
         Optional<Pedido> pedidoExistente = repository.findById(id);
         if (pedidoExistente.isPresent()) {
             Pedido pedidoAtualizado = pedidoExistente.get();
-            pedidoAtualizado.setDataPedido(pedido.getDataPedido());
             pedidoAtualizado.setCliente(pedido.getCliente());
             pedidoAtualizado.getProdutos().clear();
             pedidoAtualizado.getProdutos().addAll(pedido.getProdutos());

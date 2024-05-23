@@ -1,6 +1,6 @@
 package br.com.serratec.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,15 +12,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
-	private LocalDateTime dataPedido =LocalDateTime.now();
+
+	private LocalDate dataPedido;
+
 	
 	@JoinColumn(name = "id_cliente")
 	@ManyToOne
@@ -37,14 +38,15 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public LocalDateTime getDataPedido() {
+	public LocalDate getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(LocalDateTime dataPedido) {
-		this.dataPedido = dataPedido;
+	@PrePersist
+	public void persistDataEntrada() {
+		this.dataPedido = LocalDate.now();
 	}
-
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
