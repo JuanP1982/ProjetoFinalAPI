@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.serratec.entity.Pedido;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.repository.PedidoRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Service
@@ -31,6 +32,7 @@ public class PedidoService {
 	}
 
 	// atualizar
+
 	public Pedido atualizar(Long id, @Valid Pedido pedido) {
 		Optional<Pedido> pedidoExistente = repository.findById(id);
 		if (pedidoExistente.isPresent()) {

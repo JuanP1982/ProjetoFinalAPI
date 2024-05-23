@@ -7,6 +7,9 @@ import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 import br.com.serratec.entity.Produto;
 import br.com.serratec.exception.ResourceNotFoundException;
@@ -27,6 +30,12 @@ public class ProdutoService {
 	// inserir
 	public Produto inserir(@Valid Produto produto) {
 		return repository.save(produto);
+	}
+	
+	//inseriVarios
+	@PostMapping
+	public List<Produto> inserirMuitos(List<Produto> produto) {
+		return repository.saveAll(produto);
 	}
 
 	// atualizar

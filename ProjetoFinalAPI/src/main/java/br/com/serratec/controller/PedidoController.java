@@ -19,6 +19,7 @@ import br.com.serratec.service.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -44,6 +45,7 @@ public class PedidoController {
     }
 
     @PostMapping
+    @Transactional
     @Operation(summary = "Insere um novo pedido", description = "Inserção de Pedido")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Pedido criado com sucesso"),
@@ -54,6 +56,7 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     @Operation(summary = "Atualiza um pedido existente", description = "Atualização de Pedido")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Pedido atualizado com sucesso"),

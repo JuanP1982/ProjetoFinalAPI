@@ -1,5 +1,8 @@
 package br.com.serratec.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.serratec.enums.CategoriaEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -25,6 +28,7 @@ public class Produto {
 	
 	@JoinColumn(name = "id_pedido")
 	@ManyToOne
+	@JsonBackReference
 	private Pedido pedido;
 
 	public Long getId() {

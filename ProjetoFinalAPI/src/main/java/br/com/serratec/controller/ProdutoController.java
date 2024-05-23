@@ -48,8 +48,8 @@ public class ProdutoController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Produto criado com sucesso"),
     })
-    public ResponseEntity<Produto> inserir(@Valid @RequestBody Produto pedido) {
-        Produto novoProduto = service.inserir(pedido);
+    public ResponseEntity<List<Produto>> inserir(@Valid @RequestBody List<Produto> pedido) {
+        List<Produto> novoProduto = service.inserirMuitos(pedido);
         return new ResponseEntity<>(novoProduto, HttpStatus.CREATED);
     }
 

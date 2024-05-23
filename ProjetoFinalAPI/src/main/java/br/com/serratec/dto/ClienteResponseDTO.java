@@ -1,6 +1,9 @@
 package br.com.serratec.dto;
 
+import java.util.Set;
+
 import br.com.serratec.entity.Cliente;
+import br.com.serratec.entity.Pedido;
 
 public class ClienteResponseDTO {
 	private String nome;
@@ -8,6 +11,7 @@ public class ClienteResponseDTO {
 	private String email;
 	private String cep;
 	private String logradouro;
+	private Set<Pedido> pedidos;
 
 	public ClienteResponseDTO(Cliente cliente) {
 		super();
@@ -16,6 +20,7 @@ public class ClienteResponseDTO {
 		this.email = cliente.getEmail();
 		this.cep = cliente.getCep();
 		this.logradouro = cliente.getEndereco().getLogradouro();
+		this.pedidos = cliente.getPedidos();
 	}
 
 	public String getNome() {
@@ -58,4 +63,9 @@ public class ClienteResponseDTO {
 		this.logradouro = logradouro;
 	}
 
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+	
+	
 }
