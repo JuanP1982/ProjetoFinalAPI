@@ -35,19 +35,6 @@ public class AppConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	
-	Endereco getEndereco(Cliente cliente) throws IOException, InterruptedException {
-		HttpClient client = HttpClient.newHttpClient();
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create("https://viacep.com.br/ws/" + cliente.getCep() + "/json/")).build();
-		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-		ObjectMapper mapper = new ObjectMapper();
-		endereco = mapper.readValue(response.body(), Endereco.class);
-		System.out.println(endereco.toString());
-		return endereco;
-	}
-
 	@Bean
 	OpenAPI myOpenApi() {
 		Server dbServer = new Server();
