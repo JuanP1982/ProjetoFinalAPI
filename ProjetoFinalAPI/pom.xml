@@ -88,6 +88,11 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>br.com.serratec</groupId>
+			<artifactId>aula-01</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

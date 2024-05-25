@@ -64,4 +64,6 @@ public class PedidoService {
 		}
 		throw new ResourceNotFoundException("Pedido com o id: " + id + " não encontrado!");
 	}
+	
+	
 }

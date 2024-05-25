@@ -5,8 +5,6 @@ import java.util.Set;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -39,10 +37,9 @@ public class Cliente {
 	@Column(nullable = false)
 	private String email;
 	
-	
 	@CPF(message= "CPF invalido")
-	@NotBlank(message= "Campo vazio ou nulo")
-	@Column(nullable = false,length = 14)
+	//@NotBlank(message= "Campo vazio ou nulo")
+	//@Column(nullable = false,length = 14)
 	private String cpf;
 	
 	@Column(nullable = false)
