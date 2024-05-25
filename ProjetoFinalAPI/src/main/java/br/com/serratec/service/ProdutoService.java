@@ -35,7 +35,7 @@ public class ProdutoService {
 	
 	public Produto listarId(Long id) {
 		Produto produto = repository.findById(id).
-				orElseThrow(()-> new ResourceNotFoundException("Perfil não encontrado!"));
+				orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado!"));
 //			pedido.calculaTotal();
 			return produto;
 	}

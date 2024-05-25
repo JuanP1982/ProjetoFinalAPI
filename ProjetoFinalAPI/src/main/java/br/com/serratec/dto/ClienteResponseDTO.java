@@ -5,6 +5,7 @@ import java.util.Set;
 
 import br.com.serratec.entity.Carrinho;
 import br.com.serratec.entity.Cliente;
+import br.com.serratec.entity.Pedido;
 
 public class ClienteResponseDTO {
 	private String nome;
@@ -12,7 +13,7 @@ public class ClienteResponseDTO {
 	private String email;
 	private String cep;
 	private String logradouro;
-	private Set<PedidoResponseDTO> pedido;
+	private Set<PedidoResponseDTO> pedido = new HashSet<>();
 
 	public ClienteResponseDTO(Cliente cliente) {
 		super();
@@ -21,7 +22,10 @@ public class ClienteResponseDTO {
 		this.email = cliente.getEmail();
 		this.cep = cliente.getCep();
 		this.logradouro = cliente.getEndereco().getLogradouro();
-
+		for(Pedido pedido: cliente.getPedidos()) {
+			PedidoResponseDTO processado = new PedidoResponseDTO(pedido);
+			this.pedido.add(processado);
+		}
 	}
 
 	public ClienteResponseDTO() {
