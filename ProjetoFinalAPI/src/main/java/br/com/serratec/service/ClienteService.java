@@ -60,7 +60,7 @@ public class ClienteService {
 		c.setEndereco(endereco);
 
 		repository.save(c);
-//		mailConfig.sendMail(c.getEmail(), "Cadastro de Usuário no Sistema", c.toString());
+		mailConfig.sendMail(c.getEmail(), "Cadastro de Usuário no Sistema", c.toString());
 		return new ClienteResponseDTO(c);
 	}
 
@@ -69,7 +69,7 @@ public class ClienteService {
 			cliente.setId(id);
 			cliente.setEndereco(this.getEndereco(cliente.getCep()));
 			repository.save(cliente);
-//			mailConfig.sendMail(cliente.getEmail(), "Seu perfil de Usuário no Sistema foi atualizado", cliente.toString());
+			mailConfig.sendMail(cliente.getEmail(), "Seu perfil de Usuário no Sistema foi atualizado", cliente.toString());
 			return ResponseEntity.status(HttpStatus.OK).body("Informações Atualizadas com sucesso!");
 		}
 		throw new ResourceNotFoundException("Usuário com o id: " + id + " não encontrado!");
