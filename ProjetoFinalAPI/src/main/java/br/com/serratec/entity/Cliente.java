@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -57,15 +58,24 @@ public class Cliente {
 	@Embedded
 	private Endereco endereco;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Pedido> pedidos = new HashSet<>();
 	
-	public void calculaPedidos() {
-		for(Pedido pedido : pedidos) {
-			pedido.calculaTotal();
-		}
-	}
+//	public void calculaPedidos() {
+//		for(Pedido pedido : pedidos) {
+//			pedido.calculaTotal();
+//		}
+//	}
 	
+	
+	
+
+	@Override
+	public String toString() {
+		return "nome: " + nome + "\n telefone: " + telefone + "\n email: " + email;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -134,9 +144,8 @@ public class Cliente {
 		return pedidos;
 	}
 
-	@Override
-	public String toString() {
-		return "nome: " + nome + "\n telefone: " + telefone + "\n email: " + email;
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
+import br.com.serratec.entity.Pedido;
 import br.com.serratec.entity.Produto;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.repository.ProdutoRepository;
@@ -29,7 +29,15 @@ public class ProdutoService {
 
 	// inserir
 	public Produto inserir(@Valid Produto produto) {
+		
 		return repository.save(produto);
+	}
+	
+	public Produto listarId(Long id) {
+		Produto produto = repository.findById(id).
+				orElseThrow(()-> new ResourceNotFoundException("Perfil não encontrado!"));
+//			pedido.calculaTotal();
+			return produto;
 	}
 	
 	//inserirVarios

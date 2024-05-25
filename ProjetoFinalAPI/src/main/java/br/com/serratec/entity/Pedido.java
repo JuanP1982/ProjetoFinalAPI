@@ -1,13 +1,15 @@
 package br.com.serratec.entity;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,34 +34,20 @@ public class Pedido {
 
 	private LocalDate dataPedido;
 
-	@JsonBackReference
+	
 	@ManyToOne
 	private Cliente cliente;
 
-	@ManyToMany
-	@JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
-	private Set<Produto> produtos;
+	
+	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Carrinho> carrinhos = new HashSet<>();
 
-	public void calculaTotal() {
-		for (Produto produto : produtos) {
-			this.total = total + produto.getPreco();
-		}
-	}
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public Set<Produto> getProdutos() {
+	    Set<Produto> produtos = new HashSet<>();
+	    for (Carrinho pp : carrinhos) {
+	        produtos.add(pp.getId().getProduto());
+	    }
+	    return produtos;
 	}
 
 	public Long getId() {
@@ -70,14 +58,30 @@ public class Pedido {
 		this.id = id;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
 	public LocalDate getDataPedido() {
 		return dataPedido;
 	}
 
 	@PrePersist
-	public void persistDataEntrada() {
-		this.dataPedido = LocalDate.now();
-	}
+    public void persistDataEntrada() {
+        dataPedido = LocalDate.now();
+    }
 
 	public Cliente getCliente() {
 		return cliente;
@@ -87,8 +91,25 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public Set<Produto> getProdutos() {
-		return produtos;
+	public Set<Carrinho> getCarrinhos() {
+		return carrinhos;
 	}
+
+	public void setCarrinhos(Set<Carrinho> carrinhos) {
+		this.carrinhos = carrinhos;
+	}
+	
+	//	public void calculaTotal() {
+//		for (Produto produto : produtos) {
+//			produto.calculaTotal();
+//			this.total = total + produto.getTotal();
+//		}
+//	}
+
+	
+	
+	
+
+	
 
 }
