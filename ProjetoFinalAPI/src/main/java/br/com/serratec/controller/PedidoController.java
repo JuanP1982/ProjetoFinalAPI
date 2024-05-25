@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.serratec.dto.PedidoRequestDTO;
+import br.com.serratec.dto.PedidoResponseDTO;
 import br.com.serratec.entity.Pedido;
 import br.com.serratec.service.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,7 +42,7 @@ public class PedidoController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Retorna todos os pedidos"), 
     })
-    public List<Pedido> listar() {
+    public List<PedidoResponseDTO> listar() {
         return service.listar();
     }
     
@@ -49,7 +51,7 @@ public class PedidoController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Retorna todo o pedido"), 
     })
-    public Pedido listarId(@PathVariable Long id) {
+    public PedidoResponseDTO listarId(@PathVariable Long id) {
     	return service.listarId(id);
     }
 
@@ -59,9 +61,8 @@ public class PedidoController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Pedido criado com sucesso"),
     })
-    public ResponseEntity<Pedido> inserir(@Valid @RequestBody Pedido pedido) {
-        Pedido novoPedido = service.inserir(pedido);
-        return new ResponseEntity<>(novoPedido, HttpStatus.CREATED);
+    public PedidoResponseDTO inserir(@Valid @RequestBody PedidoRequestDTO pedidoRequestDTO) {
+       return service.inserir(pedidoRequestDTO);
     }
 
     @PutMapping("/{id}")

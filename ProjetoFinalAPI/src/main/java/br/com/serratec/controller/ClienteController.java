@@ -70,5 +70,13 @@ public class ClienteController {
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		return service.deletar(id);
 	}
+	
+	@GetMapping("/{id}")
+	 @Operation(summary = "Lista todos os clientes", description = "Listagem de Clientes")
+   @ApiResponses(value = {
+       @ApiResponse(responseCode = "200", description = "Retorna todos os clientes"),})
+	public ClienteResponseDTO listarId(@PathVariable Long id) {
+		return service.listarId(id);
+	}
 
 }
