@@ -39,9 +39,7 @@ public class ClienteService {
 
 	public List<ClienteResponseDTO> listar() {
 		List<Cliente> clientes = repository.findAll();
-		for (Cliente cliente : clientes) {
-//			cliente.calculaPedidos();
-		}
+	
 		return clientes.stream().map((c) -> new ClienteResponseDTO(c)).collect(Collectors.toList());
 	}
 
@@ -106,7 +104,7 @@ public class ClienteService {
 	public ClienteResponseDTO listarId(Long id) {
 		Cliente cliente = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Usuário com o id: " + id + " não encontrado!"));
-//	        cliente.calculaPedidos();
+
 		return new ClienteResponseDTO(cliente);
 	}
 }

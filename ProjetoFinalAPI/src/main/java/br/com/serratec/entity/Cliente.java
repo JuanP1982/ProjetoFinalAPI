@@ -62,11 +62,7 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Pedido> pedidos = new HashSet<>();
 	
-//	public void calculaPedidos() {
-//		for(Pedido pedido : pedidos) {
-//			pedido.calculaTotal();
-//		}
-//	}
+
 	
 	
 	

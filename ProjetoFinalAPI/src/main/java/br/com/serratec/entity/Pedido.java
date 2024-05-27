@@ -99,12 +99,7 @@ public class Pedido {
 		this.carrinhos = carrinhos;
 	}
 	
-	//	public void calculaTotal() {
-//		for (Produto produto : produtos) {
-//			produto.calculaTotal();
-//			this.total = total + produto.getTotal();
-//		}
-//	}
+
 
 	
 	
