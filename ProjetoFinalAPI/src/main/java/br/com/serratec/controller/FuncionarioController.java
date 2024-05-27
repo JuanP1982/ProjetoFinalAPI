@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.dto.FuncionarioResponseDTO;
 import br.com.serratec.entity.Funcionario;
+import br.com.serratec.exception.FuncionarioNaoPodeSerDeletadoException;
 import br.com.serratec.service.FuncionarioService;
 
 @RestController
@@ -51,11 +53,12 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        if (!funcionarioService.findById(id).isPresent()) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<String> deletarFuncionario(@PathVariable Long id) {
+        try {
+            funcionarioService.deletarFuncionario(id);
+            return ResponseEntity.ok("Funcionário deletado com sucesso.");
+        } catch (FuncionarioNaoPodeSerDeletadoException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
-        funcionarioService.deleteById(id);
-        return ResponseEntity.noContent().build();
     }
 }

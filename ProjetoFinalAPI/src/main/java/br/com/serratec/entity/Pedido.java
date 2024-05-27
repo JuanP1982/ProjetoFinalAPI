@@ -45,10 +45,9 @@ public class Pedido {
 	private Set<Produto> produtos;
 	
 	//ge
-	@ManyToOne
-    @JoinColumn(name = "funcionario_id")
-    private Funcionario funcionario;
-
+	   @ManyToOne
+	    @JoinColumn(name = "funcionario_id")
+	    private Funcionario funcionario;
 	//ge
     @Enumerated(EnumType.STRING)
     private StatusPedido status;

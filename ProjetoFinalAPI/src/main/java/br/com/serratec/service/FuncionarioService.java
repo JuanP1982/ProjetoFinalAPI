@@ -9,13 +9,29 @@ import org.springframework.stereotype.Service;
 
 import br.com.serratec.dto.FuncionarioResponseDTO;
 import br.com.serratec.entity.Funcionario;
+import br.com.serratec.entity.Pedido;
+import br.com.serratec.exception.FuncionarioNaoPodeSerDeletadoException;
 import br.com.serratec.repository.FuncionarioRepository;
+import br.com.serratec.repository.PedidoRepository;
 
 @Service
 public class FuncionarioService {
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
+    public void deletarFuncionario(Long id) throws FuncionarioNaoPodeSerDeletadoException {
+        // Verificar se há pedidos associados ao funcionário
+        List<Pedido> pedidos = pedidoRepository.findByFuncionarioId(id);
+        if (!pedidos.isEmpty()) {
+            throw new FuncionarioNaoPodeSerDeletadoException("Não é possível deletar o funcionário pois há pedidos associados.");
+        }
+        // Deletar o funcionário se não houver pedidos associados
+        funcionarioRepository.deleteById(id);
+    }
 
     public List<FuncionarioResponseDTO> findAll() {
         List<Funcionario> funcionarios = funcionarioRepository.findAll();
@@ -33,7 +49,7 @@ public class FuncionarioService {
         return funcionarioRepository.save(funcionario);
     }
 
-    public void deleteById(Long id) {
-        funcionarioRepository.deleteById(id);
-    }
+	
+	
 }
+   

@@ -40,13 +40,34 @@ public class Funcionario {
 	
 	
 	
-   @OneToMany(mappedBy = "funcionario")
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos;
     
    public Funcionario() {}
+   
+   
 
     
-    // Getters e Setters
+    public Funcionario(Long id, @NotBlank(message = "Nome é obrigatório") String nome,
+		@Pattern(regexp = "\\d{10,11}", message = "Telefone deve ter entre 10 e 11 dígitos") String telefone,
+		@Email(message = "Email deve ser válido") String email, @CPF String cpf, Double salario,
+		LocalDate dataNascimento, Endereco endereco, List<Pedido> pedidos) {
+	super();
+	this.id = id;
+	this.nome = nome;
+	this.telefone = telefone;
+	this.email = email;
+	this.cpf = cpf;
+	this.salario = salario;
+	this.dataNascimento = dataNascimento;
+	this.endereco = endereco;
+	this.pedidos = pedidos;
+}
+
+
+
+
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}
