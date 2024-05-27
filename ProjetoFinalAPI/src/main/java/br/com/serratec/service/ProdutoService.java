@@ -29,19 +29,19 @@ public class ProdutoService {
 
 	// inserir
 	public Produto inserir(@Valid Produto produto) {
-		
+
 		return repository.save(produto);
 	}
-	
+
 	public Produto listarId(Long id) {
-		Produto produto = repository.findById(id).
-				orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado!"));
+		Produto produto = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado!"));
 //			pedido.calculaTotal();
-			return produto;
+		return produto;
 	}
-	
-	//inserirVarios
-	
+
+	// inserirVarios
+
 	public List<Produto> inserirMuitos(List<Produto> produto) {
 		return repository.saveAll(produto);
 	}

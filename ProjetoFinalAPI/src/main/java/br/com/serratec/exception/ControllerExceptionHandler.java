@@ -58,7 +58,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(er);
 	}
 
-	
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex) {
 
@@ -70,7 +69,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroResposta);
 	}
-	
+
 	@ExceptionHandler(EnderecoException.class)
 	public ResponseEntity<Object> handleEnderecoException(EnderecoException ex) {
 

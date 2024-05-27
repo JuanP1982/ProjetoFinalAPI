@@ -9,13 +9,13 @@ import br.com.serratec.entity.Produto;
 public class PedidoRequestDTO {
 
 	private Cliente cliente;
-    private String status;
-    private Set<Long> produtoIds;
-	
+	private String status;
+	private Set<Long> produtoIds;
+
 	public PedidoRequestDTO() {
-		
+
 	}
-	
+
 	public PedidoRequestDTO(Pedido pedido) {
 		status = pedido.getStatus();
 		cliente = pedido.getCliente();
@@ -44,10 +44,5 @@ public class PedidoRequestDTO {
 	public void setProdutoIds(Set<Long> produtoIds) {
 		this.produtoIds = produtoIds;
 	}
-
-	
-	
-	
-	
 
 }

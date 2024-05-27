@@ -35,46 +35,39 @@ public class ClienteController {
 	private ClienteService service;
 
 	@GetMapping
-	 @Operation(summary = "Lista todos os clientes", description = "Listagem de Clientes")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Retorna todos os clientes"),})
+	@Operation(summary = "Lista todos os clientes", description = "Listagem de Clientes")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retorna todos os clientes"), })
 	public List<ClienteResponseDTO> listar() {
 		return service.listar();
 	}
 
 	@PostMapping
-	 @Operation(summary = "Insere um novo cliente", description = "Inserção de Cliente")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso"),
-    })
-	
-	public ResponseEntity <ClienteResponseDTO> inserir(@Valid @RequestBody Cliente cliente) throws Exception {
+	@Operation(summary = "Insere um novo cliente", description = "Inserção de Cliente")
+	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso"), })
+
+	public ResponseEntity<ClienteResponseDTO> inserir(@Valid @RequestBody Cliente cliente) throws Exception {
 		ClienteResponseDTO novoCliente = service.inserir(cliente);
-	        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
+		return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
 	}
- //teste branch
+
+	// teste branch
 	@PutMapping("{id}")
 	@Operation(summary = "Atualiza um cliente existente", description = "Atualização de Cliente")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso"),
-    })
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso"), })
 	public ResponseEntity<String> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente) {
 		return service.atualizar(id, cliente);
 	}
 
 	@DeleteMapping("{id}")
-	 @Operation(summary = "Deleta um cliente existente", description = "Exclusão de Cliente")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Cliente deletado com sucesso"),
-    })
+	@Operation(summary = "Deleta um cliente existente", description = "Exclusão de Cliente")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Cliente deletado com sucesso"), })
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		return service.deletar(id);
 	}
-	
+
 	@GetMapping("/{id}")
-	 @Operation(summary = "Lista todos os clientes", description = "Listagem de Clientes")
-   @ApiResponses(value = {
-       @ApiResponse(responseCode = "200", description = "Retorna todos os clientes"),})
+	@Operation(summary = "Lista todos os clientes", description = "Listagem de Clientes")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Retorna todos os clientes"), })
 	public ClienteResponseDTO listarId(@PathVariable Long id) {
 		return service.listarId(id);
 	}

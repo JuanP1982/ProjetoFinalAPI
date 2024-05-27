@@ -40,7 +40,7 @@ public class ClienteService {
 	public List<ClienteResponseDTO> listar() {
 		List<Cliente> clientes = repository.findAll();
 		for (Cliente cliente : clientes) {
-//			cliente.calculaPedidos();
+
 		}
 		return clientes.stream().map((c) -> new ClienteResponseDTO(c)).collect(Collectors.toList());
 	}
@@ -69,7 +69,8 @@ public class ClienteService {
 			cliente.setId(id);
 			cliente.setEndereco(this.getEndereco(cliente.getCep()));
 			repository.save(cliente);
-			mailConfig.sendMail(cliente.getEmail(), "Seu perfil de Usuário no Sistema foi atualizado", cliente.toString());
+			mailConfig.sendMail(cliente.getEmail(), "Seu perfil de Usuário no Sistema foi atualizado",
+					cliente.toString());
 			return ResponseEntity.status(HttpStatus.OK).body("Informações Atualizadas com sucesso!");
 		}
 		throw new ResourceNotFoundException("Usuário com o id: " + id + " não encontrado!");
@@ -106,7 +107,6 @@ public class ClienteService {
 	public ClienteResponseDTO listarId(Long id) {
 		Cliente cliente = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Usuário com o id: " + id + " não encontrado!"));
-//	        cliente.calculaPedidos();
 		return new ClienteResponseDTO(cliente);
 	}
 }

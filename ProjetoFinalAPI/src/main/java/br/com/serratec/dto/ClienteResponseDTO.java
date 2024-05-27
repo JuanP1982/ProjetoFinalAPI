@@ -22,7 +22,7 @@ public class ClienteResponseDTO {
 		this.email = cliente.getEmail();
 		this.cep = cliente.getCep();
 		this.logradouro = cliente.getEndereco().getLogradouro();
-		for(Pedido pedido: cliente.getPedidos()) {
+		for (Pedido pedido : cliente.getPedidos()) {
 			PedidoResponseDTO processado = new PedidoResponseDTO(pedido);
 			this.pedido.add(processado);
 		}

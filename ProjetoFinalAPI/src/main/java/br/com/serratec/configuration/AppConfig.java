@@ -47,8 +47,7 @@ public class AppConfig {
 
 		License licenca = new License().name("Apache license").url("https://.....");
 
-		Info info = new Info().title("API DE CADASTRO USUÁRIOS").version("1.0").license(licenca)
-				.description("API PARA ESTUDOS");
+		Info info = new Info().title("API E-COMMERCE").version("1.0").license(licenca).description("API PARA ESTUDOS");
 
 		return new OpenAPI().info(info).servers(List.of(dbServer, webServer));
 

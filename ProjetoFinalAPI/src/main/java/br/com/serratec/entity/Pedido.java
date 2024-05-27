@@ -26,7 +26,7 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "Campo vazio ou nulo!")
 	private String status;
 
@@ -34,20 +34,18 @@ public class Pedido {
 
 	private LocalDate dataPedido;
 
-	
 	@ManyToOne
 	private Cliente cliente;
 
-	
 	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Carrinho> carrinhos = new HashSet<>();
 
 	public Set<Produto> getProdutos() {
-	    Set<Produto> produtos = new HashSet<>();
-	    for (Carrinho pp : carrinhos) {
-	        produtos.add(pp.getId().getProduto());
-	    }
-	    return produtos;
+		Set<Produto> produtos = new HashSet<>();
+		for (Carrinho pp : carrinhos) {
+			produtos.add(pp.getId().getProduto());
+		}
+		return produtos;
 	}
 
 	public Long getId() {
@@ -79,9 +77,9 @@ public class Pedido {
 	}
 
 	@PrePersist
-    public void persistDataEntrada() {
-        dataPedido = LocalDate.now();
-    }
+	public void persistDataEntrada() {
+		dataPedido = LocalDate.now();
+	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -98,18 +96,5 @@ public class Pedido {
 	public void setCarrinhos(Set<Carrinho> carrinhos) {
 		this.carrinhos = carrinhos;
 	}
-	
-	//	public void calculaTotal() {
-//		for (Produto produto : produtos) {
-//			produto.calculaTotal();
-//			this.total = total + produto.getTotal();
-//		}
-//	}
-
-	
-	
-	
-
-	
 
 }

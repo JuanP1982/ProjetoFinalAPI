@@ -27,49 +27,44 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository repository;
-	
+
 	@Autowired
 	private ProdutoService produtoService;
-	
-	
 
 	// listarc
 	public List<PedidoResponseDTO> listar() {
 		List<Pedido> pedidos = repository.findAll();
-		
-		
-		 return pedidos.stream().map((p) -> new PedidoResponseDTO(p)).collect(Collectors.toList());
-	}
-	
-	public PedidoResponseDTO listarId(Long id) {
-	    Pedido pedido = repository.findById(id)
-	            .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado!"));
-	    PedidoResponseDTO pedidoResponseDTO = new PedidoResponseDTO(pedido);
 
-	    return pedidoResponseDTO;
+		return pedidos.stream().map((p) -> new PedidoResponseDTO(p)).collect(Collectors.toList());
 	}
-	
+
+	public PedidoResponseDTO listarId(Long id) {
+		Pedido pedido = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado!"));
+		PedidoResponseDTO pedidoResponseDTO = new PedidoResponseDTO(pedido);
+
+		return pedidoResponseDTO;
+	}
 
 	// inserir
-	  public PedidoResponseDTO inserir(@Valid PedidoRequestDTO pedidoRequestDTO) {
-	        Pedido pedido = new Pedido();
-	        
-	        pedido.setCliente(pedidoRequestDTO.getCliente());
-	        pedido.setStatus(pedidoRequestDTO.getStatus());
-	        
-	        Set<Carrinho> carrinhos = new HashSet<>();
-	        
-	        
-	        for (Long produtoId : pedidoRequestDTO.getProdutoIds()) {
-	            Produto produto = produtoService.listarId(produtoId);
-	            
-	            carrinhos.add(new Carrinho(pedido, produto));
-	        }
-	        pedido.setCarrinhos(carrinhos);
-	        repository.save(pedido);
-	        PedidoResponseDTO response = new PedidoResponseDTO(pedido);
-	        return response;
-	    }
+	public PedidoResponseDTO inserir(@Valid PedidoRequestDTO pedidoRequestDTO) {
+		Pedido pedido = new Pedido();
+
+		pedido.setCliente(pedidoRequestDTO.getCliente());
+		pedido.setStatus(pedidoRequestDTO.getStatus());
+
+		Set<Carrinho> carrinhos = new HashSet<>();
+
+		for (Long produtoId : pedidoRequestDTO.getProdutoIds()) {
+			Produto produto = produtoService.listarId(produtoId);
+
+			carrinhos.add(new Carrinho(pedido, produto));
+		}
+		pedido.setCarrinhos(carrinhos);
+		repository.save(pedido);
+		PedidoResponseDTO response = new PedidoResponseDTO(pedido);
+		return response;
+	}
 
 	// atualizar
 
