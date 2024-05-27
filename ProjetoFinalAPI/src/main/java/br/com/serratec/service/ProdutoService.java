@@ -1,16 +1,18 @@
 package br.com.serratec.service;
 
+import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.serratec.entity.Pedido;
 import br.com.serratec.entity.Produto;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.repository.ProdutoRepository;
@@ -21,23 +23,27 @@ public class ProdutoService {
 
 	@Autowired
 	private ProdutoRepository repository;
+	
+	@Autowired
+	private FotoProdutoService fotoService;
 
 	// listarc
 	public List<Produto> listar() {
-		return repository.findAll();
+		return repository.findAll().stream().map((p) -> linkImagem(p)).collect(Collectors.toList());
 	}
 
 	// inserir
-	public Produto inserir(@Valid Produto produto) {
+	public Produto inserir(@Valid Produto produto, MultipartFile file) throws IOException {
+		produto = repository.save(produto);
+		fotoService.inserir(produto, file);
 		
-		return repository.save(produto);
+		return linkImagem(produto);
 	}
 	
 	public Produto listarId(Long id) {
-		Produto produto = repository.findById(id).
-				orElseThrow(()-> new ResourceNotFoundException("Produto não encontrado!"));
-//			pedido.calculaTotal();
-			return produto;
+		Optional<Produto> produto = repository.findById(id);
+		return linkImagem(produto.get());
+		
 	}
 	
 	//inserirVarios
@@ -64,5 +70,13 @@ public class ProdutoService {
 			return ResponseEntity.status(HttpStatus.SC_OK).body("Produto deletado com sucesso!");
 		}
 		throw new ResourceNotFoundException("Produto com o id: " + id + " não encontrado!");
+	}
+	
+	public Produto linkImagem(Produto produto) {
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/{id}/foto")
+				.buildAndExpand(produto.getId()).toUri();
+		
+		produto.setUrl(uri.toString());
+		return produto;
 	}
 }

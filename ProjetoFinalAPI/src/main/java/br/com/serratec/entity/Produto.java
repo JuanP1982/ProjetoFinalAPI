@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.serratec.enums.CategoriaEnum;
 import jakarta.persistence.CascadeType;
@@ -39,6 +40,9 @@ public class Produto {
 
 	@Enumerated(EnumType.STRING)
 	private CategoriaEnum categoria;
+	
+	
+	private String url;
 
 	public void calculaTotal() {
 		this.total = this.preco * this.Quantidade;
@@ -92,5 +96,21 @@ public class Produto {
 	public void setCategoria(CategoriaEnum categoria) {
 		this.categoria = categoria;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+
+
+
+
+
+
+
 
 }
