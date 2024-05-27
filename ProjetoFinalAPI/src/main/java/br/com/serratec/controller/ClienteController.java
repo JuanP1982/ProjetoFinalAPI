@@ -52,7 +52,7 @@ public class ClienteController {
 		ClienteResponseDTO novoCliente = service.inserir(cliente);
 	        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
 	}
-
+ //teste branch
 	@PutMapping("{id}")
 	@Operation(summary = "Atualiza um cliente existente", description = "Atualização de Cliente")
     @ApiResponses(value = {
@@ -69,6 +69,14 @@ public class ClienteController {
     })
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		return service.deletar(id);
+	}
+	
+	@GetMapping("/{id}")
+	 @Operation(summary = "Lista todos os clientes", description = "Listagem de Clientes")
+   @ApiResponses(value = {
+       @ApiResponse(responseCode = "200", description = "Retorna todos os clientes"),})
+	public ClienteResponseDTO listarId(@PathVariable Long id) {
+		return service.listarId(id);
 	}
 
 }

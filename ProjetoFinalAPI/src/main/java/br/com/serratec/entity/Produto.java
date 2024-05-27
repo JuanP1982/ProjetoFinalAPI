@@ -1,18 +1,21 @@
 package br.com.serratec.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.serratec.enums.CategoriaEnum;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
@@ -26,18 +29,20 @@ public class Produto {
 	@NotBlank(message = "Campo vazio ou nulo")
 	@Column(length = 60, nullable = false)
 	private String nome;
-	
-	
-	@Min(value = 0, message ="Valor minimo é igual a 0")
-	private Double preco; 
+
+	private Double Quantidade;
+
+	@Min(value = 0, message = "Valor minimo é igual a 0")
+	private Double preco;
+
+	private Double total;
 
 	@Enumerated(EnumType.STRING)
 	private CategoriaEnum categoria;
 
-	@JoinColumn(name = "id_pedido")
-	@ManyToOne
-	@JsonBackReference
-	private Pedido pedido;
+	public void calculaTotal() {
+		this.total = this.preco * this.Quantidade;
+	}
 
 	public Long getId() {
 		return id;
@@ -55,6 +60,14 @@ public class Produto {
 		this.nome = nome;
 	}
 
+	public Double getQuantidade() {
+		return Quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		Quantidade = quantidade;
+	}
+
 	public Double getPreco() {
 		return preco;
 	}
@@ -63,20 +76,21 @@ public class Produto {
 		this.preco = preco;
 	}
 
+	public Double getTotal() {
+		this.calculaTotal();
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
 	public CategoriaEnum getCategoria() {
 		return categoria;
 	}
 
 	public void setCategoria(CategoriaEnum categoria) {
 		this.categoria = categoria;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
 	}
 
 }
