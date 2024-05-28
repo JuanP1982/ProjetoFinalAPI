@@ -33,7 +33,7 @@ public class Produto {
 	private Double Quantidade;
 
 	@Min(value = 0, message = "Valor minimo é igual a 0")
-	private Double preco;
+	private Double preco=0.0;
 
 	private Double total;
 

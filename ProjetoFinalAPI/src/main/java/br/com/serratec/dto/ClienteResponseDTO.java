@@ -5,6 +5,7 @@ import java.util.Set;
 
 import br.com.serratec.entity.Carrinho;
 import br.com.serratec.entity.Cliente;
+import br.com.serratec.entity.Favorito;
 import br.com.serratec.entity.Pedido;
 
 public class ClienteResponseDTO {
@@ -13,6 +14,9 @@ public class ClienteResponseDTO {
 	private String email;
 	private String cep;
 	private String logradouro;
+	private Set<FavoritoDTO> favorito = new HashSet<>();
+
+
 	private Set<PedidoResponseDTO> pedido = new HashSet<>();
 
 	public ClienteResponseDTO(Cliente cliente) {
@@ -22,6 +26,10 @@ public class ClienteResponseDTO {
 		this.email = cliente.getEmail();
 		this.cep = cliente.getCep();
 		this.logradouro = cliente.getEndereco().getLogradouro();
+		for(Favorito favorito: cliente.getFavorito()) {
+			FavoritoDTO processado = new FavoritoDTO(favorito);
+			this.favorito.add(processado);
+		}
 		for(Pedido pedido: cliente.getPedidos()) {
 			PedidoResponseDTO processado = new PedidoResponseDTO(pedido);
 			this.pedido.add(processado);
@@ -31,7 +39,13 @@ public class ClienteResponseDTO {
 	public ClienteResponseDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	public Set<FavoritoDTO> getFavorito() {
+		return favorito;
+	}
 
+	public void setFavorito(Set<FavoritoDTO> favorito) {
+		this.favorito = favorito;
+	}
 	public String getNome() {
 		return nome;
 	}
