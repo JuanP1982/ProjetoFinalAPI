@@ -16,13 +16,9 @@ public class ErroResposta {
 		this.erros = erros;
 	}
 
-	
-	
 	public List<String> getErros() {
 		return erros;
 	}
-
-
 
 	public Integer getStatus() {
 		return status;
@@ -48,6 +44,4 @@ public class ErroResposta {
 		this.dataHora = dataHora;
 	}
 
-	
-	
 }

@@ -5,6 +5,12 @@ import java.util.Set;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+<<<<<<< HEAD
+=======
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+>>>>>>> 2cad70f7245eb8d8409e519d4e719c9486b52e7e
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -23,47 +29,53 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank(message= "Campo vazio ou nulo")
-	@Column(length = 60, nullable=false)
+	@NotBlank(message = "Campo vazio ou nulo")
+	@Column(length = 60, nullable = false)
 	private String nome;
-	
-	@NotBlank(message= "Campo vazio ou nulo")
-	@Pattern(regexp = "(\\d{2})\\d{5}-\\d{4}",message = "Telefone invalido")
-	@Column(length = 12,nullable = false)
+
+	@NotBlank(message = "Campo vazio ou nulo")
+	@Pattern(regexp = "(\\d{2})\\d{5}-\\d{4}", message = "Telefone invalido")
+	@Column(length = 12, nullable = false)
 	private String telefone;
-	
-	@Email(message="Email invalido")
-	@NotBlank(message= "Campo vazio ou nulo")
+
+	@Email(message = "Email invalido")
+	@NotBlank(message = "Campo vazio ou nulo")
 	@Column(nullable = false)
 	private String email;
+<<<<<<< HEAD
 	
 	@CPF(message= "CPF invalido")
 	//@NotBlank(message= "Campo vazio ou nulo")
 	//@Column(nullable = false,length = 14)
+=======
+
+	@CPF(message = "CPF invalido")
+	@NotBlank(message = "Campo vazio ou nulo")
+	@Column(nullable = false, length = 14)
+>>>>>>> 2cad70f7245eb8d8409e519d4e719c9486b52e7e
 	private String cpf;
-	
+
 	@Column(nullable = false)
-	@NotBlank(message= "Campo vazio ou nulo")
+	@NotBlank(message = "Campo vazio ou nulo")
 	private String senha;
-	
+
 	@NotBlank
-	@Pattern(regexp = "(\\d{5})-\\d{3}",message = "Cep invalido")
+	@Pattern(regexp = "(\\d{5})-\\d{3}", message = "Cep invalido")
 	@Size(max = 9, message = " Tamanho inválido!")
 	private String cep;
 
 	@Embedded
 	private Endereco endereco;
-	
-	
+
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Pedido> pedidos = new HashSet<>();
-	
-	public void calculaPedidos() {
-		for(Pedido pedido : pedidos) {
-			pedido.calculaTotal();
-		}
+
+	@Override
+	public String toString() {
+		return "nome: " + nome + "\n telefone: " + telefone + "\n email: " + email;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -132,9 +144,8 @@ public class Cliente {
 		return pedidos;
 	}
 
-	@Override
-	public String toString() {
-		return "nome: " + nome + "\n telefone: " + telefone + "\n email: " + email;
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 }

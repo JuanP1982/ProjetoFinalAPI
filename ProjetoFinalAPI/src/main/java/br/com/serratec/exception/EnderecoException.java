@@ -14,6 +14,5 @@ public class EnderecoException extends RuntimeException {
 	public EnderecoException(String string, Exception e) {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

@@ -6,5 +6,5 @@ public class EmailException extends RuntimeException {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 }

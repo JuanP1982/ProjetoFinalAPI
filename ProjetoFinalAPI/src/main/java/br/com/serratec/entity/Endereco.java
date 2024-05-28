@@ -14,7 +14,6 @@ public class Endereco {
 	private String uf;
 	private String ddd;
 
-
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -60,7 +59,5 @@ public class Endereco {
 		return "Endereco [logradouro=" + logradouro + ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf
 				+ ", ddd=" + ddd + "]";
 	}
-	
-	
 
 }

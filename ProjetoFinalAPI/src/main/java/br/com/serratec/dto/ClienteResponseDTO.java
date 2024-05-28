@@ -1,7 +1,9 @@
 package br.com.serratec.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import br.com.serratec.entity.Carrinho;
 import br.com.serratec.entity.Cliente;
 import br.com.serratec.entity.Pedido;
 
@@ -11,7 +13,7 @@ public class ClienteResponseDTO {
 	private String email;
 	private String cep;
 	private String logradouro;
-	private Set<Pedido> pedidos;
+	private Set<PedidoResponseDTO> pedido = new HashSet<>();
 
 	public ClienteResponseDTO(Cliente cliente) {
 		super();
@@ -20,7 +22,14 @@ public class ClienteResponseDTO {
 		this.email = cliente.getEmail();
 		this.cep = cliente.getCep();
 		this.logradouro = cliente.getEndereco().getLogradouro();
-		this.pedidos = cliente.getPedidos();
+		for (Pedido pedido : cliente.getPedidos()) {
+			PedidoResponseDTO processado = new PedidoResponseDTO(pedido);
+			this.pedido.add(processado);
+		}
+	}
+
+	public ClienteResponseDTO() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getNome() {
@@ -63,9 +72,12 @@ public class ClienteResponseDTO {
 		this.logradouro = logradouro;
 	}
 
-	public Set<Pedido> getPedidos() {
-		return pedidos;
+	public Set<PedidoResponseDTO> getPedido() {
+		return pedido;
 	}
-	
-	
+
+	public void setPedido(Set<PedidoResponseDTO> pedido) {
+		this.pedido = pedido;
+	}
+
 }
