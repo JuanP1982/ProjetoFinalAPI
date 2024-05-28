@@ -12,6 +12,7 @@ public class CarrinhoDTO {
 	private Double valor;
 	private Double total = 0.0;
 	private CategoriaEnum categoria;
+	private Double totalConvertido=0.0;
 
 	public CarrinhoDTO(Carrinho carrinho) {
 		this.nomeCliente = carrinho.getId().getPedido().getCliente().getNome();
@@ -20,10 +21,15 @@ public class CarrinhoDTO {
 		this.valor = carrinho.getId().getProduto().getPreco();
 		this.categoria = carrinho.getId().getProduto().getCategoria();
 		this.calculaTotal();
+		this.calculaConvertido(carrinho);
+		
 	}
 
 	public void calculaTotal() {
 		this.total += this.quantidade * valor;
+	}
+	public void calculaConvertido(Carrinho carrinho){
+		this.totalConvertido=total*carrinho.getId().getPedido().getTaxa();
 	}
 
 	public String getNomeCliente() {
@@ -73,5 +79,14 @@ public class CarrinhoDTO {
 	public void setCategoria(CategoriaEnum categoria) {
 		this.categoria = categoria;
 	}
+
+	public Double getTotalConvertido() {
+		return totalConvertido;
+	}
+
+	public void setTotalConvertido(Double totalConvertido) {
+		this.totalConvertido = totalConvertido;
+	}
+	
 
 }

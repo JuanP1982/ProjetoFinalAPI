@@ -1,20 +1,13 @@
 package br.com.serratec.configuration;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import br.com.serratec.entity.Cliente;
 import br.com.serratec.entity.Endereco;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -34,6 +27,10 @@ public class AppConfig {
 	BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	   @Bean
+	    public RestTemplate restTemplate() {
+	        return new RestTemplate();
+	    }
 
 	@Bean
 	OpenAPI myOpenApi() {
@@ -53,4 +50,6 @@ public class AppConfig {
 		return new OpenAPI().info(info).servers(List.of(dbServer, webServer));
 
 	}
+
+	
 }

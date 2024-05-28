@@ -2,6 +2,7 @@ package br.com.serratec.entity;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -34,6 +35,8 @@ public class Pedido {
 
 	private LocalDate dataPedido;
 
+	private String moeda;
+	private Double taxa;
 	
 	@ManyToOne
 	private Cliente cliente;
@@ -97,6 +100,40 @@ public class Pedido {
 
 	public void setCarrinhos(Set<Carrinho> carrinhos) {
 		this.carrinhos = carrinhos;
+	}
+
+	public String getMoeda() {
+		return moeda;
+	}
+
+	public void setMoeda(String moeda) {
+		this.moeda = moeda;
+	}
+
+	public void calculaTotal() {
+	    double totalPedido = 0.0;
+	    
+	    for (Carrinho carrinho : carrinhos) {
+	        totalPedido += carrinho.getId().getProduto().getPreco() * carrinho.getId().getProduto().getQuantidade();
+	    }
+	    
+	    this.total = totalPedido;
+	
+		
+	}
+
+	public Map<String, Double> cotacoes() {
+		
+		return cotacoes();
+		
+	}
+
+	public Double getTaxa() {
+		return taxa;
+	}
+
+	public void setTaxa(Double taxa) {
+		this.taxa = taxa;
 	}
 	
 	//	public void calculaTotal() {

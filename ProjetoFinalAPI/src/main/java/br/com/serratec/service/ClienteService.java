@@ -60,7 +60,7 @@ public class ClienteService {
 		c.setEndereco(endereco);
 
 		repository.save(c);
-		mailConfig.sendMail(c.getEmail(), "Cadastro de Usuário no Sistema", c.toString());
+	//	mailConfig.sendMail(c.getEmail(), "Cadastro de Usuário no Sistema", c.toString());
 		return new ClienteResponseDTO(c);
 	}
 

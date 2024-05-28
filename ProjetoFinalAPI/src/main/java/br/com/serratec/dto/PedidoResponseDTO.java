@@ -4,12 +4,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import br.com.serratec.entity.Carrinho;
 import br.com.serratec.entity.Pedido;
-import br.com.serratec.entity.Produto;
 
 public class PedidoResponseDTO {
 
@@ -17,6 +13,8 @@ public class PedidoResponseDTO {
 	private LocalDate dataPedido;
 	private Set<CarrinhoDTO> carrinho = new HashSet<>();
 	private Double totalCarrinho = 0.0;
+	private Double totalConvertido = 0.0;
+	
 
 	public PedidoResponseDTO(Pedido pedido) {
 		this.status = pedido.getStatus();
@@ -26,7 +24,10 @@ public class PedidoResponseDTO {
 			this.totalCarrinho += processado.getTotal();
 			this.carrinho.add(processado);
 		}
+		this.totalConvertido=totalCarrinho/pedido.getTaxa();
+		
 	}
+	
 
 	public String getStatus() {
 		return status;
@@ -60,4 +61,15 @@ public class PedidoResponseDTO {
 		this.totalCarrinho = totalCarrinho;
 	}
 
-}
+	public Double getTotalConvertido() {
+		return totalConvertido;
+	}
+
+	public void setTotalConvertido(Double totalConvertido) {
+		this.totalConvertido = totalConvertido;
+	}
+	
+
+
+	}
+

@@ -9,13 +9,14 @@ import br.com.serratec.entity.Produto;
 public class PedidoRequestDTO {
 
 	private Cliente cliente;
-    private String status;
-    private Set<Long> produtoIds;
-	
+	private String status;
+	private Set<Long> produtoIds;
+	private String moeda;
+
 	public PedidoRequestDTO() {
-		
+
 	}
-	
+
 	public PedidoRequestDTO(Pedido pedido) {
 		status = pedido.getStatus();
 		cliente = pedido.getCliente();
@@ -45,9 +46,13 @@ public class PedidoRequestDTO {
 		this.produtoIds = produtoIds;
 	}
 
-	
-	
-	
+	public String getMoeda() {
+		return moeda;
+	}
+
+	public void setMoeda(String moeda) {
+		this.moeda = moeda;
+	}
 	
 
 }
