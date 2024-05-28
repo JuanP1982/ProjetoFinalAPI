@@ -31,6 +31,10 @@ public class FotoProdutoService  {
 	}
 	
 	public FotoProduto buscar(Long id) {
+		Optional<FotoProduto> fotoOptional = repository.findById(id);
+		if (!fotoOptional.isPresent()) {
+			throw new ResourceNotFoundException("Foto não encontrada");
+		}
 		Produto Produto = new Produto();
 		Produto.setId(id);
 		Optional<FotoProduto> foto = repository.findByProduto(Produto);
@@ -38,5 +42,25 @@ public class FotoProdutoService  {
 			throw new ResourceNotFoundException("Foto não encontrada");
 		}
 		return foto.get();
+	}
+	
+	public void deletar(Long id) {
+		Optional<FotoProduto> foto = repository.findById(id);
+		if (!foto.isPresent()) {
+			throw new ResourceNotFoundException("Foto não encontrada");
+		}
+		repository.deleteById(id);
+	}
+	
+	public FotoProduto atualizar(Long id, MultipartFile file) throws IOException {
+		Optional<FotoProduto> fotoOptional = repository.findById(id);
+		if (!fotoOptional.isPresent()) {
+			throw new ResourceNotFoundException("Foto não encontrada");
+		}
+		FotoProduto foto = fotoOptional.get();
+		foto.setNome(file.getName());
+		foto.setDados(file.getBytes());
+		foto.setTipo(file.getContentType());
+		return repository.save(foto);
 	}
 }
