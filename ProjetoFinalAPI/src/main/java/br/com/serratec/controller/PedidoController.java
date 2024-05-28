@@ -72,8 +72,8 @@ public class PedidoController {
         @ApiResponse(responseCode = "200", description = "Pedido atualizado com sucesso"),
         @ApiResponse(responseCode = "404", description = "Pedido não encontrado"),
     })
-    public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @Valid @RequestBody Pedido pedido) {
-        Pedido pedidoAtualizado = service.atualizar(id, pedido);
+    public ResponseEntity<PedidoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody PedidoRequestDTO pedido) {
+    	PedidoResponseDTO pedidoAtualizado = service.atualizar(id, pedido);
         if (pedidoAtualizado != null) {
             return new ResponseEntity<>(pedidoAtualizado, HttpStatus.OK);
         } else {
