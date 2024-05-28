@@ -68,13 +68,16 @@ public class PedidoService {
 
 	// atualizar
 
-	public Pedido atualizar(Long id, @Valid Pedido pedido) {
-		if (repository.existsById(id)) {
-			pedido.setId(id);
-			repository.save(pedido);
-		}
-		throw new ResourceNotFoundException("Pedido com o id: " + id + " não encontrado!");
-	}
+	public PedidoResponseDTO atualizar(Long id, @Valid PedidoRequestDTO pedido) {
+        if (repository.existsById(id)) {
+            Pedido pedidoSalvar = repository.findById(id).get();
+            pedidoSalvar.setCliente(pedido.getCliente());
+            pedidoSalvar.setStatus(pedido.getStatus());
+            repository.save(pedidoSalvar);
+            return new PedidoResponseDTO(pedidoSalvar);
+        }
+        throw new ResourceNotFoundException("Pedido com o id: " + id + " não encontrado!");
+    }
 
 	// deletar
 	public ResponseEntity<String> deletar(Long id) {
