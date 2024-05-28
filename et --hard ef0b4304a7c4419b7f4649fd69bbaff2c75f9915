@@ -1,0 +1,184 @@
+[33mcommit ef0b4304a7c4419b7f4649fd69bbaff2c75f9915[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mBrancheInd-Geisila[m[33m, [m[1;31morigin/BrancheInd-Geisila[m[33m)[m
+Merge: c175918 2cad70f
+Author: GeisilaCosta <geisilascosta@gmail.com>
+Date:   Mon May 27 21:14:09 2024 -0300
+
+    resolvendo conflito
+
+[33mcommit c175918f02a868d3fadc8654d10eca1fb7ad5c75[m
+Author: GeisilaCosta <geisilascosta@gmail.com>
+Date:   Mon May 27 20:58:47 2024 -0300
+
+    atualizacoes delete
+
+[33mcommit 2cad70f7245eb8d8409e519d4e719c9486b52e7e[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Mon May 27 19:47:05 2024 -0300
+
+    IDENTANDO O CODIGO
+
+[33mcommit 65f22ea87e9b9e0d511a35fd484c5ecfb541d9e6[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Mon May 27 15:41:33 2024 -0300
+
+    Resolvendo arquivo corrompido
+
+[33mcommit e66810220fdbe997a1f4d2a17a8a297e6fb5f50c[m
+Author: robertgall07 <robert.gbg.rg@gmail.com>
+Date:   Mon May 27 09:22:53 2024 -0300
+
+    Teste de ramificação de branch
+
+[33mcommit 6790760725954bfee8ffa1829be8935fa0e4e177[m
+Merge: 08271f4 8b9da12
+Author: Juan Pedro <53464241+JuanP1982@users.noreply.github.com>
+Date:   Sat May 25 01:07:33 2024 -0300
+
+    Merge pull request #1 from JuanP1982/BrancheInd-Juan
+    
+    Branche ind juan
+
+[33mcommit 08271f4bd153d6e267b3e7b156c7d193261befa5[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Sat May 25 01:03:28 2024 -0300
+
+    Descomentando função email
+
+[33mcommit aab7bbd92e01a747868663078f8d4815d5506d7e[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Sat May 25 00:46:23 2024 -0300
+
+    Definitivo Finalgit add .!
+
+[33mcommit 2edf08010a01e59448ae8e0e1004f66f1e485ba9[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Sat May 25 00:18:55 2024 -0300
+
+    Atualização final(eu espero que seja)
+
+[33mcommit a8d934402aa8335f6720d408d4860d307d336766[m
+Author: GeisilaCosta <geisilascosta@gmail.com>
+Date:   Fri May 24 21:20:04 2024 -0300
+
+    Atualizacoes parte individual Geisila
+
+[33mcommit 49847a4b99c3a474aa63388ab47b57da994e8704[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Thu May 23 21:01:55 2024 -0300
+
+    correção appconfig
+
+[33mcommit fffb76fe506ad36ca54686ec81d50c07ad6e3875[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Thu May 23 17:55:13 2024 -0300
+
+    final
+
+[33mcommit c3c08ee9baafec852fe801849dbfff9e930cee2b[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Thu May 23 17:52:28 2024 -0300
+
+    get by id cliente
+
+[33mcommit 8b9da12e315e1149c58e5b94e6c76ff28749dd1f[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Thu May 23 15:52:37 2024 -0300
+
+    reparando
+
+[33mcommit 57ca4bf4a8c407f7cfd0c64276db1a0aee8573f1[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Thu May 23 15:51:24 2024 -0300
+
+    testando branch
+
+[33mcommit f3774146227454ce8d70f5d6c1589ab42ab3e0d8[m[33m ([m[1;31morigin/BrancheInd-Robert[m[33m, [m[1;32mmain[m[33m)[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Thu May 23 15:42:03 2024 -0300
+
+    Mudanças finais
+
+[33mcommit 1eb5205b38e41bf4bb3e95ec63a80cc9bf145dc2[m
+Author: robertgall07 <robert.gbg.rg@gmail.com>
+Date:   Thu May 23 14:53:35 2024 -0300
+
+    Tratamento de validações
+
+[33mcommit cdda39bfa0d63911b11a4cdc0a1e1a876d6b1f57[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Thu May 23 01:18:37 2024 -0300
+
+    Correção controller e service
+
+[33mcommit 2970aca47895eb8d9c8ad99f1b1df79e7b7882d8[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Thu May 23 01:16:32 2024 -0300
+
+    Correção relacionamentos e joinTable
+
+[33mcommit 9de7a28b20c63fff871d2b4c13cdccbf046c5f18[m
+Author: leony <leo.ny2010@hotmail.com>
+Date:   Thu May 23 00:27:09 2024 -0300
+
+    atualizaçoes
+
+[33mcommit e4dda456e95f2eb33bf49ad30576ae63b1ccff02[m
+Merge: 73cee6a a2fcc2b
+Author: leony <leo.ny2010@hotmail.com>
+Date:   Wed May 22 23:02:59 2024 -0300
+
+    atualização da classe pedidos
+
+[33mcommit 73cee6a4fb28ff58aee1a025e62d340e08a431ec[m
+Author: leony <leo.ny2010@hotmail.com>
+Date:   Wed May 22 22:57:57 2024 -0300
+
+    atualização da classe pedido
+
+[33mcommit a2fcc2be0625470aefd6227b46fa5b3901f032ae[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Wed May 22 22:24:01 2024 -0300
+
+    Mudança LocalDate
+
+[33mcommit 5c8c34bb629cbccb96e4f1cb4d10ce149798af2f[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Wed May 22 21:37:49 2024 -0300
+
+    Adicionando JoinColumn
+
+[33mcommit 307e747e3bbef3da6391917a6125adb8508eb5af[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Wed May 22 18:46:31 2024 -0300
+
+    Adicionado endereço(Permitido apenas 1 por cliente proppsitalmente)
+
+[33mcommit 9b21971baa958cb23e0c5858c6b670a939e9b82b[m
+Author: leony <leo.ny2010@hotmail.com>
+Date:   Wed May 22 14:27:16 2024 -0300
+
+    atualização das documentações do Swagger Classe clienteController
+
+[33mcommit aa2177245eea155d2c88b79447e940f090688a66[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Wed May 22 00:57:35 2024 -0300
+
+    Parte do projeto
+
+[33mcommit c4da6b5d50983f3f8b07f0b89d6a3e671dc3b4c1[m
+Author: Juan Pedro <juanpedrovsc@gmail.com>
+Date:   Tue May 21 21:45:36 2024 -0300
+
+    corpo inicial do projeto
+
+[33mcommit d2a13e1aae167ac7fa8af101abadfc3e1324d1aa[m
+Author: Juan Pedro <53464241+JuanP1982@users.noreply.github.com>
+Date:   Tue May 21 21:36:09 2024 -0300
+
+    Update README.md
+
+[33mcommit ae40aeeb71099814af832074c6bf266aa9980486[m
+Author: Juan Pedro <53464241+JuanP1982@users.noreply.github.com>
+Date:   Tue May 21 21:33:31 2024 -0300
+
+    Initial commit

@@ -5,11 +5,12 @@ import java.util.Set;
 import br.com.serratec.entity.Cliente;
 import br.com.serratec.entity.Pedido;
 import br.com.serratec.entity.Produto;
+import br.com.serratec.enums.StatusPedido;
 
 public class PedidoRequestDTO {
 
 	private Cliente cliente;
-	private String status;
+	private StatusPedido status;
 	private Set<Long> produtoIds;
 
 	public PedidoRequestDTO() {
@@ -21,11 +22,13 @@ public class PedidoRequestDTO {
 		cliente = pedido.getCliente();
 	}
 
-	public String getStatus() {
+
+
+	public StatusPedido getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusPedido status) {
 		this.status = status;
 	}
 
