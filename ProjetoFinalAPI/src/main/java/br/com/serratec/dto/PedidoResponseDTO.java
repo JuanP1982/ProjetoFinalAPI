@@ -10,10 +10,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import br.com.serratec.entity.Carrinho;
 import br.com.serratec.entity.Pedido;
 import br.com.serratec.entity.Produto;
+import br.com.serratec.enums.StatusEnum;
 
 public class PedidoResponseDTO {
 
-	private String status;
+	private StatusEnum status;
 	private LocalDate dataPedido;
 	private Set<CarrinhoDTO> carrinho = new HashSet<>();
 	private Double totalCarrinho = 0.0;
@@ -28,13 +29,19 @@ public class PedidoResponseDTO {
 		}
 	}
 
-	public String getStatus() {
+
+
+	public StatusEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+
+
+	public void setStatus(StatusEnum status) {
 		this.status = status;
 	}
+
+
 
 	public LocalDate getDataPedido() {
 		return dataPedido;

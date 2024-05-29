@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.serratec.enums.CategoriaEnum;
 import jakarta.persistence.CascadeType;
@@ -15,7 +17,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
@@ -37,8 +42,11 @@ public class Produto {
 
 	private Double total;
 
-	@Enumerated(EnumType.STRING)
-	private CategoriaEnum categoria;
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")
+	private Categoria categoria;
+	
+	
 
 	public void calculaTotal() {
 		this.total = this.preco * this.Quantidade;
@@ -85,12 +93,24 @@ public class Produto {
 		this.total = total;
 	}
 
-	public CategoriaEnum getCategoria() {
+
+
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(CategoriaEnum categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+
+
+
+
+
+
+
+
+
 
 }

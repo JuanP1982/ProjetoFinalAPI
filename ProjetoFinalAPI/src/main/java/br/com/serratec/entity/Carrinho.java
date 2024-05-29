@@ -7,16 +7,17 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Carrinho {
-
+	
 	@EmbeddedId
 	private PedidoProdutoPK id = new PedidoProdutoPK();
-
+	
 	private Double total;
-
+	
+	
 	public Carrinho() {
-
+	
 	}
-
+	
 	public Carrinho(Pedido pedido, Produto produto) {
 		this.id.setPedido(pedido);
 		this.id.setProduto(produto);
@@ -37,5 +38,8 @@ public class Carrinho {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
+	
 
+	
+	
 }

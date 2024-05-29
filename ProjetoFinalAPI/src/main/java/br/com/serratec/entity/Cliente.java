@@ -26,40 +26,46 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank(message = "Campo vazio ou nulo")
-	@Column(length = 60, nullable = false)
+	@NotBlank(message= "Campo vazio ou nulo")
+	@Column(length = 60, nullable=false)
 	private String nome;
-
-	@NotBlank(message = "Campo vazio ou nulo")
-	@Pattern(regexp = "(\\d{2})\\d{5}-\\d{4}", message = "Telefone invalido")
-	@Column(length = 12, nullable = false)
+	
+	@NotBlank(message= "Campo vazio ou nulo")
+	@Pattern(regexp = "(\\d{2})\\d{5}-\\d{4}",message = "Telefone invalido")
+	@Column(length = 12,nullable = false)
 	private String telefone;
-
-	@Email(message = "Email invalido")
-	@NotBlank(message = "Campo vazio ou nulo")
+	
+	@Email(message="Email invalido")
+	@NotBlank(message= "Campo vazio ou nulo")
 	@Column(nullable = false)
 	private String email;
-
-	@CPF(message = "CPF invalido")
-	@NotBlank(message = "Campo vazio ou nulo")
+	
+	
+	@CPF(message= "CPF invalido")
+	@NotBlank(message= "Campo vazio ou nulo")
 	@Column(nullable = false, length = 14)
 	private String cpf;
-
+	
 	@Column(nullable = false)
-	@NotBlank(message = "Campo vazio ou nulo")
+	@NotBlank(message= "Campo vazio ou nulo")
 	private String senha;
-
+	
 	@NotBlank
-	@Pattern(regexp = "(\\d{5})-\\d{3}", message = "Cep invalido")
+	@Pattern(regexp = "(\\d{5})-\\d{3}",message = "Cep invalido")
 	@Size(max = 9, message = " Tamanho inválido!")
 	private String cep;
 
 	@Embedded
 	private Endereco endereco;
-
+	
 	@JsonBackReference
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Pedido> pedidos = new HashSet<>();
+	
+
+	
+	
+	
 
 	@Override
 	public String toString() {

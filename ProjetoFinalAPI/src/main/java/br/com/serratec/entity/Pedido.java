@@ -7,6 +7,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.serratec.enums.StatusEnum;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,26 +27,28 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotBlank(message = "Campo vazio ou nulo!")
-	private String status;
+	
+	
+	private StatusEnum status;
 
 	private Double total = 0.0;
 
 	private LocalDate dataPedido;
 
+	
 	@ManyToOne
 	private Cliente cliente;
 
+	
 	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Carrinho> carrinhos = new HashSet<>();
 
 	public Set<Produto> getProdutos() {
-		Set<Produto> produtos = new HashSet<>();
-		for (Carrinho pp : carrinhos) {
-			produtos.add(pp.getId().getProduto());
-		}
-		return produtos;
+	    Set<Produto> produtos = new HashSet<>();
+	    for (Carrinho pp : carrinhos) {
+	        produtos.add(pp.getId().getProduto());
+	    }
+	    return produtos;
 	}
 
 	public Long getId() {
@@ -56,11 +59,12 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public String getStatus() {
+
+	public StatusEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusEnum status) {
 		this.status = status;
 	}
 
@@ -77,9 +81,9 @@ public class Pedido {
 	}
 
 	@PrePersist
-	public void persistDataEntrada() {
-		dataPedido = LocalDate.now();
-	}
+    public void persistDataEntrada() {
+        dataPedido = LocalDate.now();
+    }
 
 	public Cliente getCliente() {
 		return cliente;
@@ -96,5 +100,13 @@ public class Pedido {
 	public void setCarrinhos(Set<Carrinho> carrinhos) {
 		this.carrinhos = carrinhos;
 	}
+	
+
+
+	
+	
+	
+
+	
 
 }

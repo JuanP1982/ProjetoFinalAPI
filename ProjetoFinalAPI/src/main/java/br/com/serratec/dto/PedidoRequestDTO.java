@@ -5,27 +5,30 @@ import java.util.Set;
 import br.com.serratec.entity.Cliente;
 import br.com.serratec.entity.Pedido;
 import br.com.serratec.entity.Produto;
+import br.com.serratec.enums.StatusEnum;
 
 public class PedidoRequestDTO {
 
 	private Cliente cliente;
-	private String status;
-	private Set<Long> produtoIds;
-
+    private StatusEnum status;
+    private Set<Long> produtoIds;
+	
 	public PedidoRequestDTO() {
-
+		
 	}
-
+	
 	public PedidoRequestDTO(Pedido pedido) {
 		status = pedido.getStatus();
 		cliente = pedido.getCliente();
 	}
 
-	public String getStatus() {
+	
+
+	public StatusEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusEnum status) {
 		this.status = status;
 	}
 
@@ -44,5 +47,10 @@ public class PedidoRequestDTO {
 	public void setProdutoIds(Set<Long> produtoIds) {
 		this.produtoIds = produtoIds;
 	}
+
+	
+	
+	
+	
 
 }

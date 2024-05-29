@@ -3,6 +3,7 @@ package br.com.serratec.dto;
 import java.util.Iterator;
 
 import br.com.serratec.entity.Carrinho;
+import br.com.serratec.entity.Categoria;
 import br.com.serratec.enums.CategoriaEnum;
 
 public class CarrinhoDTO {
@@ -11,7 +12,7 @@ public class CarrinhoDTO {
 	private Double quantidade;
 	private Double valor;
 	private Double total = 0.0;
-	private CategoriaEnum categoria;
+	private Categoria categoria;
 
 	public CarrinhoDTO(Carrinho carrinho) {
 		this.nomeCliente = carrinho.getId().getPedido().getCliente().getNome();
@@ -66,11 +67,12 @@ public class CarrinhoDTO {
 		this.total = total;
 	}
 
-	public CategoriaEnum getCategoria() {
+
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(CategoriaEnum categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 

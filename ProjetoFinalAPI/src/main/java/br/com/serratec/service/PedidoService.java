@@ -3,6 +3,7 @@ package br.com.serratec.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,57 +28,62 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository repository;
-
+	
 	@Autowired
 	private ProdutoService produtoService;
+	
+	
 
 	// listarc
 	public List<PedidoResponseDTO> listar() {
 		List<Pedido> pedidos = repository.findAll();
-
-		return pedidos.stream().map((p) -> new PedidoResponseDTO(p)).collect(Collectors.toList());
+		
+		
+		 return pedidos.stream().map((p) -> new PedidoResponseDTO(p)).collect(Collectors.toList());
 	}
-
+	
 	public PedidoResponseDTO listarId(Long id) {
-		Pedido pedido = repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado!"));
-		PedidoResponseDTO pedidoResponseDTO = new PedidoResponseDTO(pedido);
+	    Pedido pedido = repository.findById(id)
+	            .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado!"));
+	    PedidoResponseDTO pedidoResponseDTO = new PedidoResponseDTO(pedido);
 
-		return pedidoResponseDTO;
+	    return pedidoResponseDTO;
 	}
+	
 
 	// inserir
-	public PedidoResponseDTO inserir(@Valid PedidoRequestDTO pedidoRequestDTO) {
-		Pedido pedido = new Pedido();
-
-		pedido.setCliente(pedidoRequestDTO.getCliente());
-		pedido.setStatus(pedidoRequestDTO.getStatus());
-
-		Set<Carrinho> carrinhos = new HashSet<>();
-
-		for (Long produtoId : pedidoRequestDTO.getProdutoIds()) {
-			Produto produto = produtoService.listarId(produtoId);
-
-			carrinhos.add(new Carrinho(pedido, produto));
-		}
-		pedido.setCarrinhos(carrinhos);
-		repository.save(pedido);
-		PedidoResponseDTO response = new PedidoResponseDTO(pedido);
-		return response;
-	}
+	  public PedidoResponseDTO inserir(@Valid PedidoRequestDTO pedidoRequestDTO) {
+	        Pedido pedido = new Pedido();
+	        
+	        pedido.setCliente(pedidoRequestDTO.getCliente());
+	        pedido.setStatus(pedidoRequestDTO.getStatus());
+	        
+	        Set<Carrinho> carrinhos = new HashSet<>();
+	        
+	        
+	        for (Long produtoId : pedidoRequestDTO.getProdutoIds()) {
+	            Produto produto = produtoService.listarId(produtoId);
+	            
+	            carrinhos.add(new Carrinho(pedido, produto));
+	        }
+	        pedido.setCarrinhos(carrinhos);
+	        repository.save(pedido);
+	        PedidoResponseDTO response = new PedidoResponseDTO(pedido);
+	        return response;
+	    }
 
 	// atualizar
 
 	public PedidoResponseDTO atualizar(Long id, @Valid PedidoRequestDTO pedido) {
-        if (repository.existsById(id)) {
-            Pedido pedidoSalvar = repository.findById(id).get();
-            pedidoSalvar.setCliente(pedido.getCliente());
-            pedidoSalvar.setStatus(pedido.getStatus());
-            repository.save(pedidoSalvar);
-            return new PedidoResponseDTO(pedidoSalvar);
-        }
-        throw new ResourceNotFoundException("Pedido com o id: " + id + " não encontrado!");
-    }
+		if (repository.existsById(id)) {
+			Pedido pedidoSalvar = repository.findById(id).get();
+			pedidoSalvar.setCliente(pedido.getCliente());
+			pedidoSalvar.setStatus(pedido.getStatus());
+			repository.save(pedidoSalvar);
+			return new PedidoResponseDTO(pedidoSalvar);
+		}
+		throw new ResourceNotFoundException("Pedido com o id: " + id + " não encontrado!");
+	}
 
 	// deletar
 	public ResponseEntity<String> deletar(Long id) {

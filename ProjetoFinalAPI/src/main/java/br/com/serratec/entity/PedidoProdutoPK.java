@@ -6,17 +6,17 @@ import jakarta.persistence.ManyToOne;
 
 @Embeddable
 public class PedidoProdutoPK {
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
-
+	
 	public PedidoProdutoPK() {
-
+		
 	}
 
 	public Pedido getPedido() {
@@ -34,5 +34,8 @@ public class PedidoProdutoPK {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-
+	
+	
+	
+	
 }
