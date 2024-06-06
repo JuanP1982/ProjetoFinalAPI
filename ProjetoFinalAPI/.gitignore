@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+ProjetoFinalAPI/banco/db.mv.db

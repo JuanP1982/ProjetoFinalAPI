@@ -8,6 +8,7 @@ import br.com.serratec.entity.Cliente;
 import br.com.serratec.entity.Pedido;
 
 public class ClienteResponseDTO {
+	private Long id;
 	private String nome;
 	private String telefone;
 	private String email;
@@ -22,6 +23,7 @@ public class ClienteResponseDTO {
 		this.email = cliente.getEmail();
 		this.cep = cliente.getCep();
 		this.logradouro = cliente.getEndereco().getLogradouro();
+		this.id = cliente.getId();
 		for(Pedido pedido: cliente.getPedidos()) {
 			PedidoResponseDTO processado = new PedidoResponseDTO(pedido);
 			this.pedido.add(processado);
@@ -79,5 +81,15 @@ public class ClienteResponseDTO {
 	public void setPedido(Set<PedidoResponseDTO> pedido) {
 		this.pedido = pedido;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 
 }
