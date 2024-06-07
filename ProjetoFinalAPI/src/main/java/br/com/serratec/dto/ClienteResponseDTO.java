@@ -31,7 +31,7 @@ public class ClienteResponseDTO {
 	}
 
 	public ClienteResponseDTO() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public String getNome() {

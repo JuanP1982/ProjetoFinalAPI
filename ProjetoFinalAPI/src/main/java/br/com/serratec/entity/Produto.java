@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.serratec.enums.CategoriaEnum;
 import jakarta.persistence.CascadeType;
@@ -20,7 +19,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
@@ -35,6 +33,8 @@ public class Produto {
 	@Column(length = 60, nullable = false)
 	private String nome;
 
+	private String url;
+	
 	private Double Quantidade;
 
 	@Min(value = 0, message = "Valor minimo é igual a 0")
@@ -103,14 +103,11 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
+	public String getUrl() {
+		return url;
+	}
 
-
-
-
-
-
-
-
-
-
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }
