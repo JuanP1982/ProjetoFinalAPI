@@ -9,6 +9,7 @@ import br.com.serratec.enums.CategoriaEnum;
 public class CarrinhoDTO {
 	private String nomeCliente;
 	private String nomeProduto;
+	private String url;
 	private Double quantidade;
 	private Double valor;
 	private Double total = 0.0;
@@ -19,6 +20,7 @@ public class CarrinhoDTO {
 		this.nomeProduto = carrinho.getId().getProduto().getNome();
 		this.quantidade = carrinho.getId().getProduto().getQuantidade();
 		this.valor = carrinho.getId().getProduto().getPreco();
+		this.url = carrinho.getId().getProduto().getUrl();
 		this.categoria = carrinho.getId().getProduto().getCategoria();
 		this.calculaTotal();
 	}
@@ -75,5 +77,15 @@ public class CarrinhoDTO {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
 
 }
