@@ -1,5 +1,6 @@
 package br.com.serratec.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -7,11 +8,11 @@ import jakarta.persistence.ManyToOne;
 @Embeddable
 public class PedidoProdutoPK {
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 	

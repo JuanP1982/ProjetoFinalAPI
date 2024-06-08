@@ -3,7 +3,9 @@ package br.com.serratec.service;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,12 +46,13 @@ public class FotoProdutoService  {
 		return foto.get();
 	}
 	
-	public void deletar(Long id) {
+	public ResponseEntity<String> deletar(Long id) {
 		Optional<FotoProduto> foto = repository.findById(id);
 		if (!foto.isPresent()) {
 			throw new ResourceNotFoundException("Foto não encontrada");
 		}
 		repository.deleteById(id);
+		return ResponseEntity.status(HttpStatus.SC_OK).body("Foto deletada com sucesso!");
 	}
 	
 	public FotoProduto atualizar(Long id, MultipartFile file) throws IOException {

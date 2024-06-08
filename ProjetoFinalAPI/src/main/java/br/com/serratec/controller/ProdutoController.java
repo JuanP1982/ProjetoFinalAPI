@@ -98,4 +98,12 @@ public class ProdutoController {
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		return service.deletar(id);
 	}
+	
+	@DeleteMapping("/foto/{id}")
+	@Operation(summary = "Deleta uma foto existente", description = "Exclusão de foto")
+	@ApiResponses(value = { @ApiResponse(responseCode = "204", description = "foto deletada com sucesso"),
+			@ApiResponse(responseCode = "404", description = "foto não encontrada"), })
+	public ResponseEntity<String> deletarFoto(@PathVariable Long id) {
+		return fotoService.deletar(id);
+	}
 }
