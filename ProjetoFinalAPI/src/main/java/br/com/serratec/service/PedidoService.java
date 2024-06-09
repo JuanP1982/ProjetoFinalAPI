@@ -63,6 +63,9 @@ public class PedidoService {
 	        
 	        for (Long produtoId : pedidoRequestDTO.getProdutoIds()) {
 	            Produto produto = produtoService.listarId(produtoId);
+	            produto.setNome(pedidoRequestDTO.getProdutoNome());
+	            produto.setPreco(pedidoRequestDTO.getPreco());
+	            produto.setQuantidade(pedidoRequestDTO.getQuantidade());
 	            
 	            carrinhos.add(new Carrinho(pedido, produto));
 	        }

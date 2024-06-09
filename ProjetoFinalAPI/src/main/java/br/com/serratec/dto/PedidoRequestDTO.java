@@ -12,6 +12,22 @@ public class PedidoRequestDTO {
 	private Cliente cliente;
     private StatusEnum status;
     private Set<Long> produtoIds;
+    private String produtoNome;
+    private Double preco;
+    private Double quantidade;
+    
+    
+    
+
+//	{
+//       "nome": "cr",
+//		"preco": "20.00",
+//		"quantidade": 0,
+//		"categoria": {
+//			"id": 1
+//		}
+//	}
+
 	
 	public PedidoRequestDTO() {
 		
@@ -46,6 +62,30 @@ public class PedidoRequestDTO {
 
 	public void setProdutoIds(Set<Long> produtoIds) {
 		this.produtoIds = produtoIds;
+	}
+
+	public String getProdutoNome() {
+		return produtoNome;
+	}
+
+	public void setProdutoNome(String produtoNome) {
+		this.produtoNome = produtoNome;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	
