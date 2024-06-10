@@ -1,5 +1,6 @@
 package br.com.serratec.dto;
 
+import java.util.List;
 import java.util.Set;
 
 import br.com.serratec.entity.Cliente;
@@ -11,22 +12,14 @@ public class PedidoRequestDTO {
 
 	private Cliente cliente;
     private StatusEnum status;
-    private Set<Long> produtoIds;
+    private List<Long> produtoIds;
     private String produtoNome;
-    private Double preco;
-    private Double quantidade;
+    private List<Double> preco;
+    private List<Integer> quantidade;
     
     
     
 
-//	{
-//       "nome": "cr",
-//		"preco": "20.00",
-//		"quantidade": 0,
-//		"categoria": {
-//			"id": 1
-//		}
-//	}
 
 	
 	public PedidoRequestDTO() {
@@ -56,13 +49,7 @@ public class PedidoRequestDTO {
 		this.cliente = cliente;
 	}
 
-	public Set<Long> getProdutoIds() {
-		return produtoIds;
-	}
-
-	public void setProdutoIds(Set<Long> produtoIds) {
-		this.produtoIds = produtoIds;
-	}
+	
 
 	public String getProdutoNome() {
 		return produtoNome;
@@ -72,21 +59,33 @@ public class PedidoRequestDTO {
 		this.produtoNome = produtoNome;
 	}
 
-	public Double getPreco() {
+	public List<Long> getProdutoIds() {
+		return produtoIds;
+	}
+
+	public void setProdutoIds(List<Long> produtoIds) {
+		this.produtoIds = produtoIds;
+	}
+
+	public List<Double> getPreco() {
 		return preco;
 	}
 
-	public void setPreco(Double preco) {
+	public void setPreco(List<Double> preco) {
 		this.preco = preco;
 	}
 
-	public Double getQuantidade() {
+	public List<Integer> getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Double quantidade) {
+	public void setQuantidade(List<Integer> quantidade) {
 		this.quantidade = quantidade;
 	}
+
+	
+
+	
 
 	
 	

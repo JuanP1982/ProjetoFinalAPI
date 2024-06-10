@@ -10,7 +10,7 @@ public class CarrinhoDTO {
 	private String nomeCliente;
 	private String nomeProduto;
 	private String url;
-	private Double quantidade;
+	private Integer quantidade;
 	private Double valor;
 	private Double total = 0.0;
 	private Categoria categoria;
@@ -45,11 +45,13 @@ public class CarrinhoDTO {
 		this.nomeProduto = nomeProduto;
 	}
 
-	public Double getQuantidade() {
+	
+
+	public Integer getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Double quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 

@@ -37,7 +37,7 @@ public class Produto {
 
 	private String url;
 	
-	private Double Quantidade;
+	private Integer Quantidade;
 
 	@Min(value = 0, message = "Valor minimo é igual a 0")
 	private Double preco;
@@ -70,11 +70,13 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public Double getQuantidade() {
+	
+
+	public Integer getQuantidade() {
 		return Quantidade;
 	}
 
-	public void setQuantidade(Double quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		Quantidade = quantidade;
 	}
 

@@ -71,5 +71,20 @@ public class ClienteController {
 	public ClienteResponseDTO listarId(@PathVariable Long id) {
 		return service.listarId(id);
 	}
-
+	
+	@PostMapping("/login")
+    @Operation(summary = "Autentica um cliente", description = "Autenticação de Cliente")
+    @ApiResponses(value = { 
+        @ApiResponse(responseCode = "200", description = "Cliente autenticado com sucesso"), 
+        @ApiResponse(responseCode = "401", description = "Credenciais inválidas") 
+    })
+	
+    public ResponseEntity<ClienteResponseDTO> autenticar(@RequestBody Cliente credenciais) {
+		ClienteResponseDTO cliente = service.autenticar(credenciais.getEmail(), credenciais.getSenha());
+        if (cliente != null) {
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        }
+    }
 }

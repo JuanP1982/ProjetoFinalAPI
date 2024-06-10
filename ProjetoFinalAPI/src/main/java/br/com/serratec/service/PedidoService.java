@@ -52,7 +52,7 @@ public class PedidoService {
 	
 
 	// inserir
-	  public PedidoResponseDTO inserir(@Valid PedidoRequestDTO pedidoRequestDTO) {
+	 public PedidoResponseDTO inserir(@Valid PedidoRequestDTO pedidoRequestDTO) {
 	        Pedido pedido = new Pedido();
 	        
 	        pedido.setCliente(pedidoRequestDTO.getCliente());
@@ -60,17 +60,21 @@ public class PedidoService {
 	        
 	        Set<Carrinho> carrinhos = new HashSet<>();
 	        
-	        
-	        for (Long produtoId : pedidoRequestDTO.getProdutoIds()) {
+	        for (int i = 0; i < pedidoRequestDTO.getProdutoIds().size(); i++) {
+	            Long produtoId = pedidoRequestDTO.getProdutoIds().get(i);
 	            Produto produto = produtoService.listarId(produtoId);
-	            produto.setNome(pedidoRequestDTO.getProdutoNome());
-	            produto.setPreco(pedidoRequestDTO.getPreco());
-	            produto.setQuantidade(pedidoRequestDTO.getQuantidade());
+	          
+	            produto.setPreco(pedidoRequestDTO.getPreco().get(i));
+	            produto.setQuantidade(pedidoRequestDTO.getQuantidade().get(i));
 	            
 	            carrinhos.add(new Carrinho(pedido, produto));
+	            
+	    
 	        }
+	        
 	        pedido.setCarrinhos(carrinhos);
 	        repository.save(pedido);
+	        
 	        PedidoResponseDTO response = new PedidoResponseDTO(pedido);
 	        return response;
 	    }

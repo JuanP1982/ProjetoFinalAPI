@@ -107,4 +107,15 @@ public class ClienteService {
 
 		return new ClienteResponseDTO(cliente);
 	}
+	
+	public ClienteResponseDTO autenticar(String email, String senha) {
+	    Cliente cliente = repository.findByEmail(email);
+
+	    if (cliente != null && encoder.matches(senha, cliente.getSenha())) {
+	        ClienteResponseDTO response = new ClienteResponseDTO(cliente);
+	    	return response;
+	    } else {
+	        return null; 
+	    }
+	}
 }
