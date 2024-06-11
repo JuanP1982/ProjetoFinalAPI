@@ -31,8 +31,8 @@ public class Cliente {
 	private String nome;
 	
 	@NotBlank(message= "Campo vazio ou nulo")
-	@Pattern(regexp = "(\\d{2})\\d{5}-\\d{4}",message = "Telefone invalido")
-	@Column(length = 12,nullable = false)
+	@Pattern(regexp = "(\\d{2} )\\d{5}-\\d{4}",message = "Telefone invalido")
+	@Column(length = 13,nullable = false)
 	private String telefone;
 	
 	@Email(message="Email invalido")
