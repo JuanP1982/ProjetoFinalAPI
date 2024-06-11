@@ -1,9 +1,7 @@
 package br.com.serratec.service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.serratec.dto.ClienteResponseDTO;
 import br.com.serratec.dto.PedidoRequestDTO;
 import br.com.serratec.dto.PedidoResponseDTO;
-import br.com.serratec.entity.Cliente;
-import br.com.serratec.entity.Pedido;
 import br.com.serratec.entity.Carrinho;
+import br.com.serratec.entity.Pedido;
 import br.com.serratec.entity.Produto;
 import br.com.serratec.exception.ResourceNotFoundException;
 import br.com.serratec.repository.PedidoRepository;
@@ -52,32 +48,31 @@ public class PedidoService {
 	
 
 	// inserir
-	 public PedidoResponseDTO inserir(@Valid PedidoRequestDTO pedidoRequestDTO) {
-	        Pedido pedido = new Pedido();
-	        
-	        pedido.setCliente(pedidoRequestDTO.getCliente());
-	        pedido.setStatus(pedidoRequestDTO.getStatus());
-	        
-	        Set<Carrinho> carrinhos = new HashSet<>();
-	        
-	        for (int i = 0; i < pedidoRequestDTO.getProdutoIds().size(); i++) {
-	            Long produtoId = pedidoRequestDTO.getProdutoIds().get(i);
-	            Produto produto = produtoService.listarId(produtoId);
-	          
-	            produto.setPreco(pedidoRequestDTO.getPreco().get(i));
-	            produto.setQuantidade(pedidoRequestDTO.getQuantidade().get(i));
-	            
-	            carrinhos.add(new Carrinho(pedido, produto));
-	            
+	public PedidoResponseDTO inserir(@Valid PedidoRequestDTO pedidoRequestDTO) {
+	    Pedido pedido = new Pedido();
 	    
-	        }
+	    pedido.setCliente(pedidoRequestDTO.getCliente());
+	    pedido.setStatus(pedidoRequestDTO.getStatus());
+	    
+	    Set<Carrinho> carrinhos = new HashSet<>();
+	    
+	    for (int i = 0; i < pedidoRequestDTO.getProdutoIds().size(); i++) {
+	        Long produtoId = pedidoRequestDTO.getProdutoIds().get(i);
+	        Produto produto = produtoService.listarId(produtoId);
 	        
-	        pedido.setCarrinhos(carrinhos);
-	        repository.save(pedido);
+	        Carrinho carrinho = new Carrinho(pedido, produto);
+	        carrinho.setPrecoUnitario(pedidoRequestDTO.getPreco().get(i));
+	        carrinho.setQuantidade(pedidoRequestDTO.getQuantidade().get(i));
 	        
-	        PedidoResponseDTO response = new PedidoResponseDTO(pedido);
-	        return response;
+	        carrinhos.add(carrinho);
 	    }
+	    
+	    pedido.setCarrinhos(carrinhos);
+	    repository.save(pedido);
+	    
+	    PedidoResponseDTO response = new PedidoResponseDTO(pedido);
+	    return response;
+	}
 
 	// atualizar
 

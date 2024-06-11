@@ -18,8 +18,8 @@ public class CarrinhoDTO {
 	public CarrinhoDTO(Carrinho carrinho) {
 		this.nomeCliente = carrinho.getId().getPedido().getCliente().getNome();
 		this.nomeProduto = carrinho.getId().getProduto().getNome();
-		this.quantidade = carrinho.getId().getProduto().getQuantidade();
-		this.valor = carrinho.getId().getProduto().getPreco();
+		this.quantidade = carrinho.getQuantidade();
+		this.valor = carrinho.getPrecoUnitario();
 		this.url = carrinho.getId().getProduto().getUrl();
 		this.categoria = carrinho.getId().getProduto().getCategoria();
 		this.calculaTotal();
